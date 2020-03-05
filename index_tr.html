@@ -4,7 +4,7 @@
 <meta charset=utf-8 />
 <title>Coronavirus Map </title>
 <!--metda data-->
-<meta name="description" content="coronavirus, corona, COVID-19, china, novel, new, map, interactive map, death, infection, disease, outbreak, global map, spread, track, people, sick"/>
+<meta name="description" content="Koronavirüs, Koronavirüs haritası, harita, dünya haritası, interaktif, canlı, güncel, coronavirus, corona, COVID-19, china, novel, new, map, interactive map, death, infection, disease, outbreak, global map, spread, track, people "/>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57534785-5"></script>
@@ -208,30 +208,27 @@ screens  */
         <div class="leaflet-sidebar-pane" id="home">
             <h1 class="leaflet-sidebar-header">
             
-               <p ><b>Click and Hide the Pane</b></p>
+               <p ><b>Haritayı Görmek için Paneli Kapatın</b></p>
                 <span class="leaflet-sidebar-close"><h4 class="fa-pulse">X</h4></span>
             </h1>
 
-            <p class="lorem" style="margin-top:20px">Click "X" on top left corner to hide the pane and see the map.</p>
+            <p class="lorem" style="margin-top:20px"> Sol üstteki "X" işaretine tıklayarak paneli kapatabilir ve alttaki haritayı görebilirsiniz.</p>
 
-            <h4>Global Coronavirus Map (Updated Daily)</h4>
+            <h4>Küresel Koronavirüs Haritası <i>(Günlük güncel veri)</i></h4>
 
-            <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >This interactive world map aims to track the global spread of 2019 Novel Coronavirus
-                 (COVID-19) outbreak, inspired by <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6"
-                  target="_blank"> this popular map</a> produced by researchers at Johns Hopkins CSSE. <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
-                    Daily updated data </a> is also provided by John Hopkin's researchers.</p>
-            <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >There are 3 different layers. First "Confirmed Cases"
-                shows the cumulative number of infected people at those locations. Second one "Deaths" indicates cumulative number of deaths caused by 
-                this disease. Lastly, the layer "Recover" denotes
-                the cumulative number of people who got recovered. </p>
+            <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify > Bu interaktif harita, 2019 Yeni Koronavirüs'ün (COVID-19) dünyadaki yayılışını takip etmeyi amaçlar. 
+                  Haritanın hazırlanmasına ilham veren  <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6"
+                  target="_blank"> proje </a> Johns Hopkins CSSE araştırmacıları tarafından ilk olarak hazırlanıp sunulmuştur. Veri kaynağı olarak da aynı araştırmacıların günlük olarak derleyip sundukları<a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
+                     kaynaktan</a> faydalanılmaktadır.</p>
+            <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify > Sağ üst köşede görülebileceği üzere, haritayı oluşturan 3 ana tabaka mevcuttur. Bunların ilki, doğrulanmış vakalardır. Harita ilk  açıldığında bu tabaka seçili olarak gelmektedir. Her gün güncellenen sayılar önceki var olan vakalara eklenerek kümülatif toplam sayı sunulmaktadır. İkinci tabaka, verinin mevcut olduğu konumlarda, söz konusu hastalıklar neticesinde meydana gelmiş olan ölümleri yine kümülatif olarak göstermektedir.
+               Son olarak, iyileşen tabakasında da, bu hastalığı atlatan kişi sayısı kümülatif olarak sunulmuştur. Gösterimden anlaşılacağı gibi, haritadaki dairesel şekiller ve renkleri sayılarla orantılı olacak şekilde gösterilmiştir. </p>
 
-                <h6>How to use the map</h6>
-               <p style="margin-top:10px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >Labels inside the circles represents the cumulative number of people. Click on radio-buttons on top-right corner to switch between layers. In order to open popup windows
-                with more details such as name of location, date of data. </p> 
+                <h6>Harita Nasıl Kullanılır</h6>
+               <p style="margin-top:10px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify > Dairelerin üzerindeki sayılar, seçili olan tabakaya göre dairenin bulunduğu yerleşimdeki, şimdiye kadar olan; doğrulanmış vaka, ölüm ve iyileşen sayılarını toplam olarak gösterir. Bu nokta hakkında biraz daha detaylı bir bilgiye ulaşmak için noktaya tıklayıp, çıkacak olan bilgilendirme penceresini incelemek mümkündür. Tabaka değiştirmek için sağ üst köşedeki seçeneklere tıklayabilirsiniz. </p> 
 
         
              <p style="margin-top:130px; font-family:'Ubuntu' ,sans-serif; font-size:10px; line-height: 10px" align=justify >
-                tags: coronavirus, corona, COVID-19, china, novel, new, map, interactive map, infection, disease, outbreak, global map, spread, track, people, sick, death</p>
+                tags: Koronavirüs, Koronavirüs haritası, harita, dünya haritası, interaktif, canlı, güncel, coronavirus, corona, COVID-19, china, novel, new, map, interactive map, death, infection, disease, outbreak, global map, spread, track, people</p>
 
         </div>
 
@@ -557,7 +554,7 @@ var confirmedLayer = L.geoJson(null, {
     onEachFeature (feature, layer) {      
             /*popup content*/
             if (feature.properties[todayString]){
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Confirmed Cases: </b>"+feature.properties[todayString]+"<br>"+ "<b>Data Date: </b>"+[todayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Doğrulanmış Vaka: </b>"+feature.properties[todayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[todayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -572,7 +569,7 @@ var confirmedLayer = L.geoJson(null, {
             }
             else if (feature.properties[yesterdayString]){
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Confirmed Cases: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Doğrulanmış Vaka: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -587,7 +584,7 @@ var confirmedLayer = L.geoJson(null, {
             }
         else {
              /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Confirmed Cases: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[tDb_yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Doğrulanmış Vaka: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[tDb_yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -658,7 +655,7 @@ var deathsLayer = L.geoJson(null, {
             /*popup content*/
             if (feature.properties[todayString]){
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Deaths: </b>"+feature.properties[todayString]+"<br>"+ "<b>Data Date: </b>"+[todayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Ölüm: </b>"+feature.properties[todayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[todayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -673,7 +670,7 @@ var deathsLayer = L.geoJson(null, {
             }
             else if (feature.properties[yesterdayString]){
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Deaths: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Ölüm: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -688,7 +685,7 @@ var deathsLayer = L.geoJson(null, {
             }
         else {
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Deaths: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[tDb_yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Ölüm: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[tDb_yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -752,7 +749,7 @@ var recoveredLayer= L.geoJson(null, {
     onEachFeature (feature, layer) {      
             /*popup content*/
             if (feature.properties[todayString]){
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Recovered: </b>"+feature.properties[todayString]+"<br>"+ "<b>Data Date: </b>"+[todayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>İyileşen: </b>"+feature.properties[todayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[todayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -767,7 +764,7 @@ var recoveredLayer= L.geoJson(null, {
             }
             else if (feature.properties[yesterdayString]){
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Recovered: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>İyileşen: </b>"+feature.properties[yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -782,7 +779,7 @@ var recoveredLayer= L.geoJson(null, {
             }
         else {
             /*popup content*/
-            var content =  "<b>Country/Region: </b>"+feature.properties[country]+"<br>"+"<b>Province/State: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>Recovered: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Data Date: </b>"+[tDb_yesterdayString];
+            var content =  "<b>Ülke/Bölge: </b>"+feature.properties[country]+"<br>"+"<b>İl/Eyalet: </b>"+feature.properties["Province/State"]+"<br>"+ "<b>İyileşen: </b>"+feature.properties[tDb_yesterdayString]+"<br>"+ "<b>Veri Tarihi: </b>"+[tDb_yesterdayString];
             layer.bindPopup(content,{closeButton: false, offset:L.point(0,-5) });
             /* for labels inside circles*/
             var text = L.tooltip({
@@ -814,17 +811,17 @@ var baseLayers = {
 
          //grouping overlaying features
         var overlayElements = {
-        "Coronavirus": {
-        "Confirmed Cases": confirmed,
-        "Deaths": deaths,
-        "Recovered": recovered
+        "Koronavirüs": {
+        "Doğrulanmış Vaka": confirmed,
+        "Ölüm": deaths,
+        "İyilşen": recovered
 
     }
 };
 
 var options = {
   // Make the "Coronavirus" group exclusive (to use radio inputs)
-  exclusiveGroups: ["Coronavirus"],
+  exclusiveGroups: ["Koronavirüs"],
   // Show a checkbox next to non-exclusive group labels for toggling all
   groupCheckboxes: true,
   collapsed: false
@@ -880,7 +877,7 @@ confirmedLegend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [200, 300,400,500],
         labels2=[0,1000,5000,10000],
-        labels = ['<strong>Legend</strong>', "Confirmed Cases"],
+        labels = ['<strong>Gösterim</strong>', "Doğrulanmış Vaka"],
         from, to;
 	//iterate through grades and create a color field and label for each
     for (var i = 0; i < grades.length; i++) {
@@ -900,7 +897,7 @@ deathsLegend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [100, 200, 300],
         labels2=[0,50,500],
-        labels = ['<strong>Legend</strong>', "Deaths"],
+        labels = ['<strong>Gösterim</strong>', "Ölüm"],
         from, to;
 	//iterate through grades and create a color field and label for each
     for (var i = 0; i < grades.length; i++) {
@@ -923,7 +920,7 @@ recoveredLegend.onAdd = function (map) {
 var div = L.DomUtil.create('div', 'info legend'),
     grades = [100, 200, 300],
     labels2=[0,1000,2000],
-    labels = ['<strong>Legend</strong>', "Recovered"],
+    labels = ['<strong>Gösterim</strong>', "İyileşen"],
     from, to;
 //iterate through grades and create a color field and label for each
 for (var i = 0; i < grades.length; i++) {
