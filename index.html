@@ -258,6 +258,8 @@
             <h5 id="totalDeath"></h5>
             <h5 id="totalRecovered"></h5>
 
+            <h6 id="firstCases"></h6>
+
             <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >This interactive world map aims to track the global spread of 2019 Novel Coronavirus
                 (COVID-19) outbreak, inspired by <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6"
                                                     target="_blank"> this popular map</a> produced by researchers at Johns Hopkins CSSE. <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
@@ -1079,7 +1081,6 @@
             //console.log(confirmedValues)
             let percentChangeDailyArray=[]
 
-
             function DailyChange(){
             for (n = 0; n < confirmedValues.length; n++) {
                     let perc= Math.round((confirmedValues[n]-confirmedValues_OneDayAgo[n])*100/confirmedValues_OneDayAgo[n])
@@ -1105,6 +1106,27 @@
             //sort by country names
             k.sort(function(a,b){return b[1]-a[1];});
             console.log(k)
+
+             let newCases=[]
+
+            function SelectNewCases(){
+
+                for (p=0; p<k.length; p++) {
+
+                    if (k[p][1]=="First Case") {
+
+                        newCases.push(k[p][0])
+
+                    }
+
+                }
+
+            }
+            SelectNewCases()
+
+            //console.log(worldTotal_Confirmed)
+
+            document.getElementById("firstCases").innerHTML="First Cases: "+newCases
 
 
             //zip values from both lists
