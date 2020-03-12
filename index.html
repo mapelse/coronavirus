@@ -216,11 +216,13 @@
         }
 
         h5 {
+            width:100%;
             margin-top:30px;
             font-family:'Ubuntu'
         }
 
         h6 {
+            width:100%;
             margin-top:30px;
             font-family:'Ubuntu'
         }
@@ -264,7 +266,7 @@
             <h5 id="totalRecovered"></h5>
 
             <h6 id="firstCases"></h6>
-
+            <h6 id="topFive"></h6>
             <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >This interactive world map aims to track the global spread of 2019 Novel Coronavirus
                 (COVID-19) outbreak, inspired by <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6"
                                                     target="_blank"> this popular map</a> produced by researchers at Johns Hopkins CSSE. <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
@@ -1128,10 +1130,29 @@
 
             }
             SelectNewCases()
+            let topFive=[]
+            function selectTopFive() {
+                topFive=k.slice(1,6)
+            }
+            selectTopFive()
+
+            var topFiveString="";
+            function createString(){
+                for (v=0;v<topFive.length;v++){
+                    topFiveString+=topFive[v][0]
+                    topFiveString+=" "
+                    topFiveString+=topFive[v][1]
+                    topFiveString+="%  -   "
+                }
+            }
+            createString()
+            //console.log(topFiveString)
 
             //console.log(worldTotal_Confirmed)
 
-            document.getElementById("firstCases").innerHTML="First Cases: "+newCases
+            document.getElementById("firstCases").innerHTML="<b>First Cases:</b> "+newCases
+
+            document.getElementById("topFive").innerHTML="<b>Top 5 Daily Change %: </b> "+topFiveString
 
 
             //zip values from both lists
