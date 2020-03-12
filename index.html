@@ -1017,9 +1017,9 @@
                     var nmbr=parseInt(results.data[i][lastCol]);
                     totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                 }
-                //except US,China,Canada and Australia. Push the country name to the labels list
+                //except US,China,Canada and Australia. Push the country name to the labels listt
                 //and push the corresponding value to the values list
-                else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
+                else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China" || results.data[i][1]!="China"
                     || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" ){
                     var nmbr=parseInt(results.data[i][lastCol]);
                     confirmedValues.push(nmbr);
