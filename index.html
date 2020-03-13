@@ -563,7 +563,7 @@
         /*points to the layer with the latest day's data from the csv*/
         pointToLayer (feature, layer) {
             if (feature.properties[todayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic"){
-                if (feature.properties[todayString]<1000){
+                if (feature.properties[todayString]<1000 && feature.properties[todayString]!=0 ){
                     return L.circleMarker(layer, smallMedium_icon)
                 }
                 else if (feature.properties[todayString]>=1000 && feature.properties[todayString]<5000){
@@ -576,7 +576,7 @@
                     return L.circleMarker(layer,large_icon)
                 }
             } else if (feature.properties[yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic") {
-                if (feature.properties[yesterdayString]<1000){
+                if (feature.properties[yesterdayString]<1000 && feature.properties[yesterdayString]!=0 ){
                     return L.circleMarker(layer, smallMedium_icon)
                 }
                 else if (feature.properties[yesterdayString]>=1000 && feature.properties[yesterdayString]<5000){
@@ -590,7 +590,7 @@
                 }
             }
             else if (feature.properties[tDb_yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic") {
-                if (feature.properties[tDb_yesterdayString]<100){
+                if (feature.properties[tDb_yesterdayString]<100 && feature.properties[tDb_yesterdayString]!=0){
                     return L.circleMarker(layer, smallMedium_icon)
                 }
                 else if (feature.properties[tDb_yesterdayString]>=1000 && feature.properties[tDb_yesterdayString]<5000){
@@ -669,7 +669,7 @@
         pointToLayer (feature, layer) {
             /*points to the layer with the latest day's data from the csv*/
             if (feature.properties[todayString] &&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic"){
-                if (feature.properties[todayString]<50){
+                if (feature.properties[todayString]<50 && feature.properties[todayString]!=0){
                     return L.circleMarker(layer, small_icon_d)
                 }
                 else if (feature.properties[todayString]>=50 && feature.properties[todayString]<500){
@@ -679,7 +679,7 @@
                     return L.circleMarker(layer,large_icon_d)
                 }
             } else if (feature.properties[yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic") {
-                if (feature.properties[yesterdayString]<50){
+                if (feature.properties[yesterdayString]<50 && feature.properties[yesterdayString]!=0 ){
                     return L.circleMarker(layer, small_icon_d)
                 }
                 else if (feature.properties[yesterdayString]>=50 && feature.properties[yesterdayString]<500){
@@ -690,7 +690,7 @@
                 }
             }
             else if (feature.properties[tDb_yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic"){
-                if (feature.properties[tDb_yesterdayString]<50){
+                if (feature.properties[tDb_yesterdayString]<50 && feature.properties[tDb_yesterdayString]!=0 ){
                     return L.circleMarker(layer, small_icon_d)
                 }
                 else if (feature.properties[tDb_yesterdayString]>=50 && feature.properties[tDb_yesterdayString]<500){
@@ -764,7 +764,7 @@
         pointToLayer (feature, layer) {
             /*points to the layer with the latest day's data from the csv*/
             if (feature.properties[todayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic"){
-                if (feature.properties[todayString]<1000){
+                if (feature.properties[todayString]<1000 && feature.properties[todayString]!=0){
                     return L.circleMarker(layer, small_icon_r)
                 }
                 else if (feature.properties[todayString]>=1000 && feature.properties[todayString]<2000){
@@ -774,7 +774,7 @@
                     return L.circleMarker(layer,large_icon_r)
                 }
             } else if (feature.properties[yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic") {
-                if (feature.properties[yesterdayString]<1000){
+                if (feature.properties[yesterdayString]<1000 && feature.properties[yesterdayString]!=0){
                     return L.circleMarker(layer, small_icon_r)
                 }
                 else if (feature.properties[yesterdayString]>=1000 && feature.properties[yesterdayString]<2000){
@@ -785,7 +785,7 @@
                 }
             }
             else if (feature.properties[tDb_yesterdayString]&&feature.properties[country]!="Iran (Islamic Republic of)" && feature.properties[country]!="Mainland China"&&feature.properties[country]!="Republic of Korea"&&feature.properties[country]!="Czech Republic") {
-                if (feature.properties[tDb_yesterdayString]<1000){
+                if (feature.properties[tDb_yesterdayString]<1000 && feature.properties[tDb_yesterdayString]!=0){
                     return L.circleMarker(layer, small_icon_r)
                 }
                 else if (feature.properties[tDb_yesterdayString]>=1000 && feature.properties[tDb_yesterdayString]<2000){
