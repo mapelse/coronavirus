@@ -138,7 +138,7 @@
 
         }
         .leaflet-sidebar-header p{
-            margin-bottom: 1px;
+            margin-bottom: 0px;
             margin-top: 0px;
         }
         .leaflet-sidebar-tabs > li.active, .leaflet-sidebar-tabs > ul > li.active {
@@ -146,6 +146,7 @@
 
         }
 
+       
         .info {
             padding: 6px 8px;
             font-size: 13px;
@@ -215,18 +216,37 @@
             background: #f1f7ff;
         }
 
+        .upperInfo {
+            background: rgb(243, 238, 163);
+
+        }
+
         h5 {
             width:100%;
-            margin-top:30px;
-            font-family:'Ubuntu'
+            margin-top:10px;
+            font-family:'Ubuntu';
+            padding:0.4em;
+            
+        }
+
+        .lowerInfo{
+
+            background: rgb(241, 203, 159);
+
         }
 
         h6 {
             width:100%;
-            margin-top:30px;
-            font-family:'Ubuntu'
+            margin-top:10px;
+            font-family:'Ubuntu';
+            padding:0.4em;
+            
         }
 
+
+        #sidebar > div.leaflet-sidebar-tabs > ul:nth-child(1) > li.active > a > span {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -237,7 +257,7 @@
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist">
-            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#home" role="tab"><span class="fa fa-bars" style="vertical-align: middle;"></span></a></li>
             <li><a href="index.html" role="tab"><img src="images/logo.svg" style="width: 20px; height: 20px;" alt="" /></i></a></li>
             <!-- <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li> -->
         </ul>
@@ -255,18 +275,24 @@
             <h1 class="leaflet-sidebar-header">
 
                 <p ><b>Click and Hide the Pane</b></p>
-                <span class="leaflet-sidebar-close"><h4 class="fa-pulse">X</h4></span>
+                <span class="leaflet-sidebar-close"><p class="fa-pulse">X</p></span>
             </h1>
 
             <p class="lorem" style="margin-top:20px">Click "X" on top left corner to hide the pane and see the map.</p>
 
             <h4>Global Coronavirus Map (Updated Daily)</h4>
-            <h5 id="totalConfirmed"></h5>
-            <h5 id="totalDeath"></h5>
-            <h5 id="totalRecovered"></h5>
+            <div class="upperInfo"> 
+                <h5 id="totalConfirmed"></h5>
+                <h5 id="totalDeath"></h5>
+                <h5 id="totalRecovered"></h5>
+            </div>
+            
+            <div class="lowerInfo"> 
 
             <h6 id="firstCases"></h6>
             <h6 id="topFive"></h6>
+            </div>
+
             <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >This interactive world map aims to track the global spread of 2019 Novel Coronavirus
                 (COVID-19) outbreak, inspired by <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6"
                                                     target="_blank"> this popular map</a> produced by researchers at Johns Hopkins CSSE. <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
@@ -276,7 +302,7 @@
                 this disease. Lastly, the layer "Recover" denotes
                 the cumulative number of persons who got recovered. </p>
 
-            <h6>How to use the map</h6>
+            <h6 style="background: none;">How to use the map</h6>
             <p style="margin-top:10px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >Labels inside the circles represents the cumulative number of persons. Click on radio-buttons on top-right corner to switch between layers. In order to open popup windows
                 with more details such as name of location, date of data. </p>
 
@@ -1148,9 +1174,9 @@
             createString()
             //console.log(topFiveString)
 
-            document.getElementById("firstCases").innerHTML="<b>First Cases:</b> "+newCases
+            document.getElementById("firstCases").innerHTML="<b>Countries that most recently announced the first confirmed cases within their borders:</b> "+"</br>"+newCases
 
-            document.getElementById("topFive").innerHTML="<b>Top 5 Daily Change %: </b> "+topFiveString
+            document.getElementById("topFive").innerHTML="<b>Countries with the Highest Daily Change %: </b> "+"</br>"+topFiveString
 
 
             //zip values from both lists
