@@ -370,6 +370,7 @@
                 with more details such as name of location, date of data. </p>
 
             <div id="container" style="width:100%; height:3000px;"></div>
+            <div id="container2" style="width:100%; height:1000px;"></div>
             <p style="margin-top:130px; font-family:'Ubuntu' ,sans-serif; font-size:10px; line-height: 10px" align=justify >
                 tags: coronavirus, corona, COVID-19, china, novel, new, map, interactive map, infection, disease, outbreak, global map, spread, track, people, sick, death</p>
 
@@ -1258,7 +1259,7 @@
             var c = confirmedLabels.map(function(e, i) {
                 return [e, confirmedValues[i]];
             });
-            //sort by country names
+            //sort descending
             c.sort(function(a,b){return b[1]-a[1];});
             //console.log(c)
 
@@ -1534,14 +1535,15 @@
 
             document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily change % in deaths: </b> "+"</br>"+topFiveString
 ////////////////////////////////////////////////////////////////////////
+           
 
             //zip values from both lists
             var c = deathsLabels.map(function(e, i) {
                 return [e, deathsValues[i]];
             });
-            //sort by country names
-            c.sort();
-            //console.log(c)
+            //sort descending
+            c.sort(function(a,b){return b[1]-a[1];});
+            console.log(c)
 
             //create new lists to separate and store the sorted data
             sortedDeathLabels=[];
@@ -1549,11 +1551,15 @@
 
             function separateValues() {
                 for (n = 0; n < c.length; n++) {
+                   if (c[n][1]!=0){
                     sortedDeathLabels.push(c[n][0])
+                   }
                 }
 
                 for (n = 0; n < c.length; n++) {
+                    if (c[n][1]!=0){
                     sortedDeathValues.push(c[n][1])
+                    }
                 }
             }
 
@@ -1600,18 +1606,18 @@
             //console.log(sortedConfirmedLabels)
             //console.log(sortedConfirmedValues)
 
-           /* Highcharts.chart('container', {
+            Highcharts.chart('container2', {
                 chart: {
                     type: 'bar'
                 },
                 title: {
-                    text: 'Confirmed COVID-19 CASES'
+                    text: 'Deaths'
                 },
                 subtitle: {
-                    text: 'Total Confirmed by Countries'
+                    text: 'Deaths by Countries'
                 },
                 xAxis: {
-                    categories: sortedConfirmedLabels,
+                    categories: sortedDeathLabels,
                     title: {
                         text: null
                     }
@@ -1636,7 +1642,7 @@
                         }
                     }
                 },
-                legend: {
+                /*legend: {
                     layout: 'vertical',
                     align: 'right',
                     verticalAlign: 'top',
@@ -1647,17 +1653,17 @@
                     backgroundColor:
                         Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
                     shadow: true
-                },
+                },*/
                 credits: {
                     enabled: false
                 },
                 series: [{
-                    name: 'Confirmed Cases',
-                    data:sortedConfirmedValues
+                    name: 'Deaths',
+                    data:sortedDeathValues
 
                 }]
             });
-                */
+                
         },
 
 
