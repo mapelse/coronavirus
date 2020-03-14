@@ -17,9 +17,9 @@
   gtag('config', 'UA-57534785-5');
 </script>
     <!--Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
-
+    
     <!--leaflet style-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
           integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -99,7 +99,7 @@
             background-color: rgb(47, 60, 66);
             color: white;
             font-size: 12px;
-            font-family:'Ubuntu';
+            font-family:'Ubuntu',sans-serif;;
             border-radius: 3px;
             box-shadow: 0 1px 2px rgba(0,0,0,.1);
             padding: 1px;
@@ -224,7 +224,7 @@
         h5 {
             width:100%;
             margin-top:10px;
-            font-family:'Ubuntu';
+            font-family:'Ubuntu',sans-serif;
             padding:0.4em;
             
         }
@@ -246,7 +246,7 @@
         h6 {
             width:100%;
             margin-top:10px;
-            font-family:'Ubuntu';
+            font-family:'Ubuntu', sans-serif;;
             padding:0.4em;
             
         }
@@ -1155,16 +1155,24 @@
                     totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                     totalConfirmed_Aus_OneDayAgo+=nmbr_OneDayAgo
                 }
-                else if (results.data[i][1]=="France"){
+                else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin"){
                     var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                     var nmbr=parseInt(results.data[i][lastCol]);
                     confirmedLabels.push(results.data[i][0])
+                    confirmedValues.push(nmbr);
+                    confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
+                }
+                else if (results.data[i][0]=="United Kingdom" || results.data[i][0]=="Channel Islands" || results.data[i][0]=="Gibraltar" ){
+                    var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+                    var nmbr=parseInt(results.data[i][lastCol]);
+                    confirmedLabels.push(results.data[i][0])
+                    confirmedValues.push(nmbr);
                     confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
                 }
                 //except US,China,Canada and Australia. Push the country name to the labels list
                 //and push the corresponding value to the values list
                 else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
-                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" ){
+                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" || results.data[i][1]!="United Kingdom"  ){
                     var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                     var nmbr=parseInt(results.data[i][lastCol]);
                     confirmedValues.push(nmbr);
@@ -1181,9 +1189,10 @@
             confirmedValues.push(totalConfirmed_US,totalConfirmed_China, totalConfirmed_Canada, totalConfirmed_Aus);
             confirmedValues_OneDayAgo.push(totalConfirmed_US_OneDayAgo,totalConfirmed_China_OneDayAgo,totalConfirmed_Canada_OneDayAgo,totalConfirmed_Aus_OneDayAgo)
 
-
-            //console.log(confirmedValues_OneDayAgo)
-            //console.log(confirmedValues)
+            /*console.log(confirmedLabels)
+            console.log(confirmedValues)
+            console.log(confirmedValues_OneDayAgo)*/
+            
             let percentChangeDailyArray=[]
             //calculate daily change compared to data from the day before
             function DailyChange(){
@@ -1201,8 +1210,8 @@
 
             DailyChange();
 
-
-            //console.log(percentChangeDailyArray)
+            
+        
 
             //zip values from both lists
             var zippedPercDailyChange = confirmedLabels.map(function(e, i) {
@@ -1210,7 +1219,8 @@
             });
             //sort descending percent change
             zippedPercDailyChange.sort(function(a,b){return b[1]-a[1];});
-            //console.log(zipped)
+           
+            
 
              let newCases=[]
             //finding countries with the first ever cases
@@ -1236,7 +1246,7 @@
                     newCases.push("N/A for today")
                 }
         
-            console.log(newCases)
+            //console.log(newCases)
             let newCasesString="";
             function newCasesToString(){
                 for (i=0; i<newCases.length;i++){
@@ -1245,7 +1255,7 @@
                 }
             }
             newCasesToString()
-            console.log(newCasesString)
+            //console.log(newCasesString)
             //slice countries with the top five % daily change from top
             let topFive=[]
             function selectTopFive() {
@@ -1283,7 +1293,7 @@
             //create new lists to separate and store the sorted data
             sortedConfirmedLabels=[];
             sortedConfirmedValues=[];
-
+            
             function separateValues() {
                 for (n = 0; n < c.length; n++) {
                     sortedConfirmedLabels.push(c[n][0])
@@ -1293,19 +1303,23 @@
                     sortedConfirmedValues.push(c[n][1])
                 }
             }
-
+            
             separateValues()
+           
+            //console.log(sortedConfirmedValues)
 
             //all total confirmed regardless of country
             let worldTotal_Confirmed=0
             function totalGlobal_Confirmed() {
+               
                 for (n = 0; n < c.length; n++) {
                     worldTotal_Confirmed+=c[n][1]
             }
+                
             return worldTotal_Confirmed
             }
             totalGlobal_Confirmed()
-            
+            console.log(worldTotal_Confirmed)
             //splitting the number visually from 1000's
             partsOfValue=[]
             while (worldTotal_Confirmed>1000) {
@@ -1318,7 +1332,7 @@
                 
             }
             partsOfValue.reverse()
-
+            
 
            let worldTotal_Confirmed_String="";
            //console.log(partsOfValue.length)
@@ -1330,7 +1344,7 @@
            return worldTotal_Confirmed_String
            }
            stringCreate();
-          //console.log(worldTotal_Confirmed_String)
+          console.log(worldTotal_Confirmed_String)
 
 
            document.getElementById("totalConfirmed").innerHTML="<b>Total Confirmed Cases:</b> "+worldTotal_Confirmed_String
@@ -1567,7 +1581,7 @@
             });
             //sort descending
             c.sort(function(a,b){return b[1]-a[1];});
-            console.log(c)
+            //console.log(c)
 
             //create new lists to separate and store the sorted data
             sortedDeathLabels=[];
