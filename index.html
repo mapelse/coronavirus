@@ -1193,6 +1193,81 @@
             console.log(confirmedValues)
             console.log(confirmedValues_OneDayAgo)*/
             
+            //zip values from both lists
+             var c = confirmedLabels.map(function(e, i) {
+                return [e, confirmedValues[i]];
+            });
+            //sort descending
+            c.sort(function(a,b){return b[1]-a[1];});
+
+            //zip values from both lists
+            var cYes = confirmedLabels.map(function(e, i) {
+                return [e, confirmedValues_OneDayAgo[i]];
+            });
+            //sort descending
+            cYes.sort(function(a,b){return b[1]-a[1];});
+            
+           
+            //create new lists to separate and store the sorted data
+            sortedConfirmedLabels=[];
+            sortedConfirmedValues=[];
+            
+            function separateValues() {
+                for (n = 0; n < c.length; n++) {
+                    sortedConfirmedLabels.push(c[n][0])
+                }
+
+                for (n = 0; n < c.length; n++) {
+                    sortedConfirmedValues.push(c[n][1])
+                }
+            }
+            
+            separateValues()
+           
+            //console.log(sortedConfirmedValues)
+
+            //all total confirmed regardless of country
+            let worldTotal_Confirmed=0
+            function totalGlobal_Confirmed() {
+               
+                for (n = 0; n < c.length; n++) {
+                    worldTotal_Confirmed+=c[n][1]
+            }
+                
+            return worldTotal_Confirmed
+            }
+            totalGlobal_Confirmed()
+            console.log(worldTotal_Confirmed)
+            //splitting the number visually from 1000's
+            partsOfValue=[]
+            while (worldTotal_Confirmed>1000) {
+                worldTotal_Confirmed=worldTotal_Confirmed/1000
+                partsOfValue.push(Math.floor(1000*((worldTotal_Confirmed) - Math.floor(worldTotal_Confirmed))))
+
+                if (worldTotal_Confirmed<1000) {
+                    partsOfValue.push(Math.floor(1000*(worldTotal_Confirmed/1000)))
+                }
+                
+            }
+            partsOfValue.reverse()
+            
+
+           let worldTotal_Confirmed_String="";
+           //console.log(partsOfValue.length)
+            function stringCreate() {
+               for (m=0; m<partsOfValue.length; m++){
+                worldTotal_Confirmed_String=worldTotal_Confirmed_String+" "+partsOfValue[m]
+                //console.log(worldTotal_Confirmed_String)
+           }
+           return worldTotal_Confirmed_String
+           }
+           stringCreate();
+          console.log(worldTotal_Confirmed_String)
+
+
+           document.getElementById("totalConfirmed").innerHTML="<b>Total Confirmed Cases:</b> "+worldTotal_Confirmed_String
+
+
             let percentChangeDailyArray=[]
             //calculate daily change compared to data from the day before
             function DailyChange(){
@@ -1267,6 +1342,36 @@
                 topFive=zippedPercDailyChange.slice(1,6)
             }
             selectTopFive()
+            
+            //find the today's cases for corresponding country from the topFive list
+            let toConfirmed=[]
+            for (i=0;i<topFive.length;i++){
+            for (n=0;n<c.length;n++){
+            if (topFive[i][0]==c[n][0]){
+                    console.log(topFive[i][0],c[n][0])
+                   
+                    toConfirmed.push(c[n][1])
+
+            }
+            }
+            
+            }
+
+
+            //console.log(toConfirmed)
+            //find the yesterday's cases for corresponding country from the topFive list
+            let fromConfirmed=[]
+            for (i=0;i<topFive.length;i++){
+            for (n=0;n<c.length;n++){
+            if (topFive[i][0]==cYes[n][0]){
+                    fromConfirmed.push(cYes[n][1])
+
+            }
+            }
+            
+            }
+
+            console.log(fromConfirmed)
 
             //put them in a format that will be displayed properly to the user
             var topFiveString="";
@@ -1276,9 +1381,9 @@
                     topFiveString+=" "
                     topFiveString+=topFive[v][1]
                     if (topFive[v+1]){
-                    topFiveString+="% - "
+                    topFiveString+="% - from "+fromConfirmed[v]+" to "+ toConfirmed[v]+ "</br> "
                     } else {
-                        topFiveString+="%"
+                        topFiveString+="% - from "+fromConfirmed[v]+" to "+toConfirmed[v]
                     }
                 }
             }
@@ -1291,75 +1396,6 @@
             document.getElementById("topFive").innerHTML="<b>Countries with the highest daily change % in confirmed cases: </b> "+"</br>"+topFiveString
 
 
-            //zip values from both lists
-            var c = confirmedLabels.map(function(e, i) {
-                return [e, confirmedValues[i]];
-            });
-            //sort descending
-            c.sort(function(a,b){return b[1]-a[1];});
-            //console.log(c)
-
-            //create new lists to separate and store the sorted data
-            sortedConfirmedLabels=[];
-            sortedConfirmedValues=[];
-            
-            function separateValues() {
-                for (n = 0; n < c.length; n++) {
-                    sortedConfirmedLabels.push(c[n][0])
-                }
-
-                for (n = 0; n < c.length; n++) {
-                    sortedConfirmedValues.push(c[n][1])
-                }
-            }
-            
-            separateValues()
-           
-            //console.log(sortedConfirmedValues)
-
-            //all total confirmed regardless of country
-            let worldTotal_Confirmed=0
-            function totalGlobal_Confirmed() {
-               
-                for (n = 0; n < c.length; n++) {
-                    worldTotal_Confirmed+=c[n][1]
-            }
-                
-            return worldTotal_Confirmed
-            }
-            totalGlobal_Confirmed()
-            console.log(worldTotal_Confirmed)
-            //splitting the number visually from 1000's
-            partsOfValue=[]
-            while (worldTotal_Confirmed>1000) {
-                worldTotal_Confirmed=worldTotal_Confirmed/1000
-                partsOfValue.push(Math.floor(1000*((worldTotal_Confirmed) - Math.floor(worldTotal_Confirmed))))
-
-                if (worldTotal_Confirmed<1000) {
-                    partsOfValue.push(Math.floor(1000*(worldTotal_Confirmed/1000)))
-                }
-                
-            }
-            partsOfValue.reverse()
-            
-
-           let worldTotal_Confirmed_String="";
-           //console.log(partsOfValue.length)
-            function stringCreate() {
-               for (m=0; m<partsOfValue.length; m++){
-                worldTotal_Confirmed_String=worldTotal_Confirmed_String+" "+partsOfValue[m]
-                //console.log(worldTotal_Confirmed_String)
-           }
-           return worldTotal_Confirmed_String
-           }
-           stringCreate();
-          console.log(worldTotal_Confirmed_String)
-
-
-           document.getElementById("totalConfirmed").innerHTML="<b>Total Confirmed Cases:</b> "+worldTotal_Confirmed_String
-
-            //console.log(sortedConfirmedLabels)
-            //console.log(sortedConfirmedValues)
 
             Highcharts.chart('container', {
                 chart: {
@@ -1496,6 +1532,22 @@
             deathsValues_OneDayAgo.push(totalDeaths_US_OneDayAgo,totalDeaths_China_OneDayAgo,totalDeaths_Canada_OneDayAgo,totalDeaths_Aus_OneDayAgo)
          
 /////////////////////////////////////////////////////
+
+            //zip values from both lists
+            var c = deathsLabels.map(function(e, i) {
+                return [e, deathsValues[i]];
+            });
+            //sort descending
+            c.sort(function(a,b){return b[1]-a[1];});
+            //console.log(c)
+
+             //zip values from both lists
+             var cYes = deathsLabels.map(function(e, i) {
+                return [e, deathsValues_OneDayAgo[i]];
+            });
+            //sort descending
+            cYes.sort(function(a,b){return b[1]-a[1];});
+           
             let percentChangeDailyArray=[]
             //calculate daily change compared to data from the day before
             function DailyChange(){
@@ -1525,6 +1577,8 @@
             //sort descending percent change
             zippedPercDailyChange.sort(function(a,b){return b[1]-a[1];});
             //console.log(zippedPercDailyChange)
+
+
 
              let firstDeath=[]
             //finding countries with the first ever cases
@@ -1569,22 +1623,51 @@
             }
             selectTopFive()
 
+
+                //find the today's deaths for corresponding country from the topFive list
+                let toDeath=[]
+            for (i=0;i<topFive.length;i++){
+            for (n=0;n<c.length;n++){
+            if (topFive[i][0]==c[n][0]){
+                    console.log(topFive[i][0],c[n][0])
+                   
+                    toDeath.push(c[n][1])
+
+            }
+            }
+            
+            }
+
+
+            //console.log(toConfirmed)
+            //find the yesterday's deaths for corresponding country from the topFive list
+            let fromDeath=[]
+            for (i=0;i<topFive.length;i++){
+            for (n=0;n<c.length;n++){
+            if (topFive[i][0]==cYes[n][0]){
+                    fromDeath.push(cYes[n][1])
+
+            }
+            }
+            
+            }
+
             //put them in a format that will be displayed properly to the user
             var topFiveString="";
             function createString(){
                 for (v=0;v<topFive.length;v++){
-                    topFiveString+=topFive[v][0]
-                    topFiveString+=" "
+                    topFiveString+=topFive[v][0]+" "
                     topFiveString+=topFive[v][1]
                     if (topFive[v+1]) {
-                    topFiveString+="% - "
+                    topFiveString+="% - from "+fromDeath[v]+" to "+toDeath[v]+"</br>"
                     } else {
-                        topFiveString+="%"
+                        topFiveString+="% - from "+fromDeath[v]+" to "+toDeath[v]
                     }
                 }
             }
             createString()
             //console.log(topFiveString)
+
 
             //push the values the document
             document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first case of death within their borders:</b> "+"</br>"+firstDeathString
@@ -1593,13 +1676,7 @@
 ////////////////////////////////////////////////////////////////////////
            
 
-            //zip values from both lists
-            var c = deathsLabels.map(function(e, i) {
-                return [e, deathsValues[i]];
-            });
-            //sort descending
-            c.sort(function(a,b){return b[1]-a[1];});
-            //console.log(c)
+            
 
             //create new lists to separate and store the sorted data
             sortedDeathLabels=[];
