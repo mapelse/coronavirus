@@ -1251,7 +1251,12 @@
             function newCasesToString(){
                 for (i=0; i<newCases.length;i++){
                     newCasesString+=newCases[i]
+                    if (newCases[i+1]){
                     newCasesString+=" - "
+                    }
+                    else {
+                        newCasesString+=""
+                    }
                 }
             }
             newCasesToString()
@@ -1270,7 +1275,11 @@
                     topFiveString+=topFive[v][0]
                     topFiveString+=" "
                     topFiveString+=topFive[v][1]
-                    topFiveString+="%  -   "
+                    if (topFive[v+1]){
+                    topFiveString+="% - "
+                    } else {
+                        topFiveString+="%"
+                    }
                 }
             }
             createString()
@@ -1544,7 +1553,12 @@
             function firstDeathToString(){
                 for (i=0; i<firstDeath.length;i++){
                     firstDeathString+=firstDeath[i]
-                    firstDeathString+=" - "
+                    if (firstDeath[i+1]){
+                        firstDeathString+=" - "
+                    }
+                    else {
+                        firstDeathString+=""
+                    }
                 }
             }
             firstDeathToString()
@@ -1562,7 +1576,11 @@
                     topFiveString+=topFive[v][0]
                     topFiveString+=" "
                     topFiveString+=topFive[v][1]
-                    topFiveString+="%  -   "
+                    if (topFive[v+1]) {
+                    topFiveString+="% - "
+                    } else {
+                        topFiveString+="%"
+                    }
                 }
             }
             createString()
@@ -1603,7 +1621,7 @@
 
             separateValues()
 
-            //all total confirmed regardless of country
+            //all total deaths regardless of country
             let worldTotal_Deaths=0
             function totalGlobal_Deaths() {
                 for (n = 0; n < c.length; n++) {
@@ -1784,7 +1802,7 @@
 
             separateValues()
 
-            //all total confirmed regardless of country
+            //all total recovered regardless of country
             let worldTotal_Recovered=0
             function totalGlobal_Recovered() {
                 for (n = 0; n < c.length; n++) {
