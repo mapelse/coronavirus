@@ -1155,10 +1155,16 @@
                     totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                     totalConfirmed_Aus_OneDayAgo+=nmbr_OneDayAgo
                 }
+                else if (results.data[i][1]=="France"){
+                    var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+                    var nmbr=parseInt(results.data[i][lastCol]);
+                    confirmedLabels.push(results.data[i][0])
+                    confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
+                }
                 //except US,China,Canada and Australia. Push the country name to the labels list
                 //and push the corresponding value to the values list
                 else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
-                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" ){
+                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" ){
                     var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                     var nmbr=parseInt(results.data[i][lastCol]);
                     confirmedValues.push(nmbr);
@@ -1166,6 +1172,7 @@
                     confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
 
                 }
+               
                 else {
                     console.log("ERROR")
                 }
@@ -1228,7 +1235,17 @@
             if (newCases.length==0) {
                     newCases.push("N/A for today")
                 }
-
+        
+            console.log(newCases)
+            let newCasesString="";
+            function newCasesToString(){
+                for (i=0; i<newCases.length;i++){
+                    newCasesString+=newCases[i]
+                    newCasesString+=" - "
+                }
+            }
+            newCasesToString()
+            console.log(newCasesString)
             //slice countries with the top five % daily change from top
             let topFive=[]
             function selectTopFive() {
@@ -1250,7 +1267,7 @@
             //console.log(topFiveString)
 
             //push the values the document
-            document.getElementById("firstCases").innerHTML="<b>Countries that most recently announced the first confirmed cases within their borders:</b> "+"</br>"+newCases
+            document.getElementById("firstCases").innerHTML="<b>Countries that most recently announced the first confirmed cases within their borders:</b> "+"</br>"+newCasesString
 
             document.getElementById("topFive").innerHTML="<b>Countries with the highest daily change % in confirmed cases: </b> "+"</br>"+topFiveString
 
@@ -1509,7 +1526,14 @@
             if (firstDeath.length==0) {
                     firstDeath.push("N/A")
                 }
-
+            let firstDeathString=""
+            function firstDeathToString(){
+                for (i=0; i<firstDeath.length;i++){
+                    firstDeathString+=firstDeath[i]
+                    firstDeathString+=" - "
+                }
+            }
+            firstDeathToString()
             //slice countries with the top five % daily change from top
             let topFive=[]
             function selectTopFive() {
@@ -1531,7 +1555,7 @@
             //console.log(topFiveString)
 
             //push the values the document
-            document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first case of death within their borders:</b> "+"</br>"+firstDeath
+            document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first case of death within their borders:</b> "+"</br>"+firstDeathString
 
             document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily change % in deaths: </b> "+"</br>"+topFiveString
 ////////////////////////////////////////////////////////////////////////
