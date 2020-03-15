@@ -263,7 +263,12 @@ background: rgb(241, 203, 159);
 border-radius: 7px;
 
 }
+.Increase2{
 
+    background: rgb(236, 135, 104);
+border-radius: 7px;
+
+}
             .percentDeath{
 
             background: rgb(236, 135, 104);
@@ -346,6 +351,11 @@ border-radius: 7px;
                 <h6 id="topFive"></h6>
 
             </div>
+            <div class="Increase2" >
+                <h6 id="deathIncrease"></h6>
+            </div>
+
+            
 
             <div class="firstDeathsInfo">
                 <h6 id="firstDeath"></h6>
@@ -1643,6 +1653,52 @@ border-radius: 7px;
 
 
             //console.log(percentChangeDailyArray)
+            let changeDailyArray=[]
+            //calculate daily change compared to data from the day before
+            function dailyChangeNumber(){
+            for (n = 0; n < deathsValues.length; n++) {
+                    let difference= deathsValues[n]-deathsValues_OneDayAgo[n]
+                    
+                    changeDailyArray.push(difference)
+                    
+                     
+                }
+            }
+
+            dailyChangeNumber();
+
+           
+
+            //zip values from both lists difference change and labels NUMBER OF PERSONS
+            var zippedChangeDaily = deathsLabels.map(function(e, i) {
+                return [e, changeDailyArray[i]];
+            });
+            //sort descending percent change
+            zippedChangeDaily.sort(function(a,b){return b[1]-a[1];});
+
+            let topTenDifference=[]
+            function selectTopTen() {
+                topTenDifference=zippedChangeDaily.slice(1,11)
+            }
+            selectTopTen()
+
+          
+
+            let topTenDiffString="";
+            for (i=0;i<topTenDifference.length;i++){
+                topTenDiffString+=topTenDifference[i][0]+" - "+topTenDifference[i][1]
+                if (topTenDifference[i+1]){
+                    topTenDiffString+="</br>"
+                } else {
+                    topTenDiffString+=""
+                }
+            }
+            console.log(topTenDiffString)
+
+            //push the values the document
+            document.getElementById("deathIncrease").innerHTML="<b>Top 10 countries with the highest daily increase in number of deaths:</b> "+"</br>"+topTenDiffString
+
+
 
             //zip values from both lists
             var zippedPercDailyChange = deathsLabels.map(function(e, i) {
