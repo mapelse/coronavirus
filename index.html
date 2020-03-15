@@ -1155,7 +1155,7 @@
                     totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                     totalConfirmed_Aus_OneDayAgo+=nmbr_OneDayAgo
                 }
-                else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin"){
+                else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
                     var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                     var nmbr=parseInt(results.data[i][lastCol]);
                     confirmedLabels.push(results.data[i][0])
@@ -1513,10 +1513,24 @@
                     totalDeaths_Aus=totalDeaths_Aus + nmbr
                     totalDeaths_Aus_OneDayAgo+=nmbr_OneDayAgo
                 }
+                else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
+                    var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+                    var nmbr=parseInt(results.data[i][lastCol]);
+                    deathsLabels.push(results.data[i][0])
+                    deathsValues.push(nmbr);
+                    deathsValues_OneDayAgo.push(nmbr_OneDayAgo)
+                }
+                else if (results.data[i][0]=="United Kingdom" || results.data[i][0]=="Channel Islands" || results.data[i][0]=="Gibraltar" ){
+                    var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+                    var nmbr=parseInt(results.data[i][lastCol]);
+                    deathsLabels.push(results.data[i][0])
+                    deathsValues.push(nmbr);
+                    deathsValues_OneDayAgo.push(nmbr_OneDayAgo)
+                }
                 //except US,China,Canada and Australia. Push the country name to the labels list
                 //and push the corresponding value to the values list
                 else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
-                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" ){
+                    || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="United Kingdom"|| results.data[i][1]!="France"){
                     var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                     var nmbr=parseInt(results.data[i][lastCol]);
                     deathsValues_OneDayAgo.push(nmbr_OneDayAgo);
