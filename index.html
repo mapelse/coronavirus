@@ -257,6 +257,12 @@
             border-radius: 7px;
 
             }
+            .Increase{
+
+background: rgb(241, 203, 159);
+border-radius: 7px;
+
+}
 
             .percentDeath{
 
@@ -330,6 +336,11 @@
             
             </div>
 
+            <div class="Increase" >
+                <h6 id="caseIncrease"></h6>
+            </div>
+
+
             <div class="percentConfirmed">
 
                 <h6 id="topFive"></h6>
@@ -350,8 +361,7 @@
             
 
                 
-    
-
+           
             
 
             
@@ -1285,10 +1295,53 @@
 
             DailyChange();
 
-            
-        
+            let changeDailyArray=[]
+            //calculate daily change compared to data from the day before
+            function dailyChangeNumber(){
+            for (n = 0; n < confirmedValues.length; n++) {
+                    let difference= confirmedValues[n]-confirmedValues_OneDayAgo[n]
+                    
+                    changeDailyArray.push(difference)
+                    
+                     
+                }
+            }
 
-            //zip values from both lists
+            dailyChangeNumber();
+
+           
+
+            //zip values from both lists difference change and labels NUMBER OF PERSONS
+            var zippedChangeDaily = confirmedLabels.map(function(e, i) {
+                return [e, changeDailyArray[i]];
+            });
+            //sort descending percent change
+            zippedChangeDaily.sort(function(a,b){return b[1]-a[1];});
+
+            let topTenDifference=[]
+            function selectTopTen() {
+                topTenDifference=zippedChangeDaily.slice(1,11)
+            }
+            selectTopTen()
+
+          
+
+            let topTenDiffString="";
+            for (i=0;i<topTenDifference.length;i++){
+                topTenDiffString+=topTenDifference[i][0]+" - "+topTenDifference[i][1]
+                if (topTenDifference[i+1]){
+                    topTenDiffString+="</br>"
+                } else {
+                    topTenDiffString+=""
+                }
+            }
+            console.log(topTenDiffString)
+
+            //push the values the document
+            document.getElementById("caseIncrease").innerHTML="<b>Top 10 countries with the highest daily increase in number of persons infected:</b> "+"</br>"+topTenDiffString
+
+
+            //zip values from both lists perc change and labels
             var zippedPercDailyChange = confirmedLabels.map(function(e, i) {
                 return [e, percentChangeDailyArray[i]];
             });
@@ -1467,8 +1520,6 @@
 
         
     });
-
-console.log(worldTotal_Confirmed)
 
     
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -2015,10 +2066,11 @@ console.log(worldTotal_Confirmed)
 
     });
 
-   
 
 
     };
+
+  
 
 </script>
 </body>
