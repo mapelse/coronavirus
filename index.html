@@ -1328,9 +1328,11 @@ border-radius: 7px;
             //sort descending percent change
             zippedChangeDaily.sort(function(a,b){return b[1]-a[1];});
 
+            console.log(zippedChangeDaily)
+
             let topTenDifference=[]
             function selectTopTen() {
-                topTenDifference=zippedChangeDaily.slice(1,11)
+                topTenDifference=zippedChangeDaily.slice(0,11)
             }
             selectTopTen()
 
@@ -1408,7 +1410,7 @@ border-radius: 7px;
             //slice countries with the top five % daily change from top
             let topFive=[]
             function selectTopFive() {
-                topFive=zippedPercDailyChange.slice(1,6)
+                topFive=zippedPercDailyChange.slice(0,6)
             }
             selectTopFive()
             
@@ -1676,7 +1678,7 @@ border-radius: 7px;
 
             let topTenDifference=[]
             function selectTopTen() {
-                topTenDifference=zippedChangeDaily.slice(1,11)
+                topTenDifference=zippedChangeDaily.slice(0,11)
             }
             selectTopTen()
 
@@ -1754,7 +1756,7 @@ border-radius: 7px;
             //slice countries with the top five % daily change from top
             let topFive=[]
             function selectTopFive() {
-                topFive=zippedPercDailyChange.slice(1,6)
+                topFive=zippedPercDailyChange.slice(0,6)
             }
             selectTopFive()
 
