@@ -1286,11 +1286,15 @@
 
                 function separateValues() {
                     for (n = 0; n < c.length; n++) {
+                        if (c [n][1]!=0) {
                         sortedConfirmedLabels.push(c[n][0])
                     }
+                }
 
                     for (n = 0; n < c.length; n++) {
+                        if (c[n][1]!=0) {
                         sortedConfirmedValues.push(c[n][1])
+                    }
                     }
                 }
 
