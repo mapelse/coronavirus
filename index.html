@@ -1201,7 +1201,10 @@
                         totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                         totalConfirmed_Aus_OneDayAgo+=nmbr_OneDayAgo
                     }
-                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
+                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="Reunion" ||  
+                    results.data[i][0]=="Guadeloupe" || results.data[i][0]=="Mayotte" || 
+                    results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || 
+                    results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
 
                         var nmbr=parseInt(results.data[i][lastCol]);
@@ -1647,7 +1650,10 @@
                         totalDeaths_Aus=totalDeaths_Aus + nmbr
                         totalDeaths_Aus_OneDayAgo+=nmbr_OneDayAgo
                     }
-                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
+                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="Reunion" ||  
+                    results.data[i][0]=="Guadeloupe" || results.data[i][0]=="Mayotte" || 
+                    results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || 
+                    results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
                         deathsLabels_StatesAndOverseas.push(results.data[i][0])
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                         var nmbr=parseInt(results.data[i][lastCol]);
