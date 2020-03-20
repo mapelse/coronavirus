@@ -183,9 +183,7 @@
             background: rgba(255, 255, 255, 0.8);
         }
 
-        #container {
-            height: 1800px;
-        }
+        
 
         .highcharts-data-table table {
             font-family: Verdana, sans-serif;
@@ -276,6 +274,28 @@
 
         }
 
+        .firstRecoveredInfo{
+
+            background: rgb(148, 194, 231);
+border-radius: 7px;
+
+}
+
+.percentRecoveredInfo{
+
+background: rgb(148, 194, 231);
+border-radius: 7px;
+
+}
+
+
+.RecoveredInfo{
+
+background: rgb(148, 194, 231);
+border-radius: 7px;
+
+}
+
         #sidebar > div.leaflet-sidebar-tabs > ul:nth-child(1) > li.active > a > span {
             margin-top: 10px;
         }
@@ -335,16 +355,18 @@
                 <h5 id="totalRecovered"></h5>
             </div>
 
+            <div class="Increase" >
+                <h6 id="caseIncrease"></h6>
+            </div>
+
+
             <div class="firstEverInfo">
 
                 <h6 id="firstCases"></h6>
 
             </div>
 
-            <div class="Increase" >
-                <h6 id="caseIncrease"></h6>
-            </div>
-
+            
 
             <div class="percentConfirmed">
 
@@ -369,6 +391,18 @@
             </div>
 
 
+            <div class="RecoveredInfo">
+                <h6 id="recoveryIncrease"></h6>
+            </div>
+
+            <div class="firstRecoveredInfo">
+                <h6 id="firstCasesRecovered"></h6>
+            </div>
+            <div class="percentRecoveredInfo">
+                <h6 id="topFiveRecovered"></h6>
+            </div>
+           
+
 
 
 
@@ -391,6 +425,7 @@
 
             <div id="container" style="width:100%; height:3000px;"></div>
             <div id="container2" style="width:100%; height:1000px;"></div>
+            <div id="container3" style="width:100%; height:1000px;"></div>
             <p style="margin-top:130px; font-family:'Ubuntu' ,sans-serif; font-size:10px; line-height: 10px" align=justify >
                 tags: coronavirus, corona, COVID-19, china, novel, new, map, interactive map, infection, disease, outbreak, global map, spread, track, people, sick, death</p>
 
@@ -1513,7 +1548,7 @@
                 //push the values the document
                 document.getElementById("firstCases").innerHTML="<b>Countries that most recently announced the first confirmed cases within their borders:</b> "+"</br>"+newCasesString
 
-                document.getElementById("topFive").innerHTML="<b>Countries with the highest daily change % in confirmed cases: </b> "+"</br>"+topFiveString
+                document.getElementById("topFive").innerHTML="<b>Countries with the highest daily % change in confirmed cases: </b> "+"</br>"+topFiveString
 
 
                 Highcharts.chart('container', {
@@ -1647,10 +1682,7 @@
                         totalDeaths_Aus=totalDeaths_Aus + nmbr
                         totalDeaths_Aus_OneDayAgo+=nmbr_OneDayAgo
                     }
-                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="Reunion" ||  
-                    results.data[i][0]=="Guadeloupe" || results.data[i][0]=="Mayotte" || 
-                    results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || 
-                    results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
+                    else if ( results.data[i][1]=="France" ){
                         deathsLabels_StatesAndOverseas.push(results.data[i][0])
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                         var nmbr=parseInt(results.data[i][lastCol]);
@@ -1660,7 +1692,7 @@
                         deathsValues.push(nmbr);
                         deathsValues_OneDayAgo.push(nmbr_OneDayAgo)
                     }
-                    else if (results.data[i][0]=="United Kingdom" || results.data[i][0]=="Channel Islands" || results.data[i][0]=="Gibraltar" ){
+                    else if (results.data[i][1]=="United Kingdom" ){
                         deathsLabels_StatesAndOverseas.push(results.data[i][0])
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                         var nmbr=parseInt(results.data[i][lastCol]);
@@ -1919,7 +1951,7 @@
                 //push the values the document
                 document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first case of death within their borders:</b> "+"</br>"+firstDeathString
 
-                document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily change % in deaths: </b> "+"</br>"+topFiveString
+                document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily % change in deaths: </b> "+"</br>"+topFiveString
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -2034,63 +2066,161 @@
 
         });
 
-        //GRAPH, DATA OPERATIONS for recovered
-        let worldTotal_Recovered=0
+        //GRAPH, DATA OPERATIONS for Recovered
+        let worldTotal_Recovered=0;
         let recoveredLabels=[];
         let recoveredValues=[];
+        let recoveredLabels_StatesAndOverseas=[];
+        let recoveredValues_StatesAndOverseas=[];
+        let recoveredValues_StatesAndOverseas_OneDayAgo=[];
+        let recoveredValues_OneDayAgo=[];
         //In order to find total cases in US,China,Canada and Australia
         let totalRecovered_US=0;
         let totalRecovered_China=0;
         let totalRecovered_Canada=0;
         let totalRecovered_Aus=0;
-        //putting confirmed cases into array format, into the empty arrays defined above
+        //in order to find daily change %
+        let totalRecovered_US_OneDayAgo=0;
+        let totalRecovered_China_OneDayAgo=0;
+        let totalRecovered_Canada_OneDayAgo=0;
+        let totalRecovered_Aus_OneDayAgo=0;
+        //putting recovered cases into array format, into the empty arrays defined above
         Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv", {
             download: true,
             complete: function(results) {
                 //select the latest column
                 let lastCol=results.data[1].length-1;
+                //select the column before the latest to use its data in daily % change calc
+                let last2Col=results.data[1].length-2;
                 //find the row where country name is either "US","China","Canada" or "Australia"
                 //and add the corresponding value to the total sum of that country
                 for (i=1; i< results.data.length; i++) {
                     if (results.data[i][1]=="US"){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
                         var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
                         totalRecovered_US=totalRecovered_US + nmbr
+                        totalRecovered_US_OneDayAgo+=nmbr_OneDayAgo
                     }
                     else if (results.data[i][1]=="China"){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
                         var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
                         totalRecovered_China=totalRecovered_China + nmbr
+                        totalRecovered_China_OneDayAgo+=nmbr_OneDayAgo
                     }
                     else if (results.data[i][1]=="Canada"){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
                         var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
                         totalRecovered_Canada=totalRecovered_Canada + nmbr
+                        totalRecovered_Canada_OneDayAgo+=nmbr_OneDayAgo
                     }
                     else if (results.data[i][1]=="Australia"){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
                         var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
                         totalRecovered_Aus=totalRecovered_Aus + nmbr
+                        totalRecovered_Aus_OneDayAgo+=nmbr_OneDayAgo
+                    }
+                    else if (results.data[i][1]=="France"){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
+                        var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
+                        recoveredLabels.push(results.data[i][0])
+                        recoveredValues.push(nmbr);
+                        recoveredValues_OneDayAgo.push(nmbr_OneDayAgo)
+                    }
+                    else if (results.data[i][1]=="United Kingdom" ){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+
+                        var nmbr=parseInt(results.data[i][lastCol]);
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
+
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
+                        recoveredLabels.push(results.data[i][0])
+                        recoveredValues.push(nmbr);
+                        recoveredValues_OneDayAgo.push(nmbr_OneDayAgo)
                     }
                         //except US,China,Canada and Australia. Push the country name to the labels list
                     //and push the corresponding value to the values list
                     else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
-                        || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" ){
+                        || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" || results.data[i][1]!="United Kingdom"  ){
+                        recoveredLabels_StatesAndOverseas.push(results.data[i][0])
+                        var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                         var nmbr=parseInt(results.data[i][lastCol]);
+                        recoveredValues_StatesAndOverseas.push(nmbr)
+                        recoveredValues_StatesAndOverseas_OneDayAgo.push(nmbr_OneDayAgo)
+
                         recoveredValues.push(nmbr);
                         recoveredLabels.push(results.data[i][1])
+                        recoveredValues_OneDayAgo.push(nmbr_OneDayAgo)
+
                     }
+
                     else {
                         console.log("ERROR")
                     }
                 }
                 recoveredLabels.push("US","China","Canada","Australia");
                 recoveredValues.push(totalRecovered_US,totalRecovered_China, totalRecovered_Canada, totalRecovered_Aus);
-                //console.log(confirmedLabels+"\n"+confirmedValues)
+                recoveredValues_OneDayAgo.push(totalRecovered_US_OneDayAgo,totalRecovered_China_OneDayAgo,totalRecovered_Canada_OneDayAgo,totalRecovered_Aus_OneDayAgo)
 
                 //zip values from both lists
+                var cStatesOverSeas = recoveredLabels.map(function(e, i) {
+                    return [e, recoveredValues_StatesAndOverseas[i]];
+                });
+                //sort descending
+                cStatesOverSeas.sort(function(a,b){return b[1]-a[1];});
+
+                //zip values from both lists
+                var cStatesOverSeas_OneDayAgo = recoveredLabels.map(function(e, i) {
+                    return [e, recoveredValues_StatesAndOverseas_OneDayAgo[i]];
+                });
+                //sort descending
+                cStatesOverSeas_OneDayAgo.sort(function(a,b){return b[1]-a[1];});
+
+
                 var c = recoveredLabels.map(function(e, i) {
                     return [e, recoveredValues[i]];
                 });
-                //sort by country names
-                c.sort();
-                //console.log(c)
+                //sort descending
+                c.sort(function(a,b){return b[1]-a[1];});
+
+                //zip values from both lists
+                var cYes = recoveredLabels.map(function(e, i) {
+                    return [e, recoveredValues_OneDayAgo[i]];
+                });
+                //sort descending
+                cYes.sort(function(a,b){return b[1]-a[1];});
+
 
                 //create new lists to separate and store the sorted data
                 sortedRecoveredLabels=[];
@@ -2098,106 +2228,300 @@
 
                 function separateValues() {
                     for (n = 0; n < c.length; n++) {
+                        if (c [n][1]!=0) {
                         sortedRecoveredLabels.push(c[n][0])
                     }
+                }
 
                     for (n = 0; n < c.length; n++) {
+                        if (c[n][1]!=0) {
                         sortedRecoveredValues.push(c[n][1])
+                    }
                     }
                 }
 
                 separateValues()
 
+                //console.log(sortedRecoveredValues)
+
                 //all total recovered regardless of country
-                let worldTotal_Recovered=0
+
                 function totalGlobal_Recovered() {
+
                     for (n = 0; n < c.length; n++) {
                         worldTotal_Recovered+=c[n][1]
                     }
+
                     return worldTotal_Recovered
                 }
                 totalGlobal_Recovered()
-
-                console.log(worldTotal_Recovered)
-                //splitting the number visually from 1000's
+                //console.log(worldTotal_Recovered)
 
                 //number to string with comma separation
                 function numberWithCommas(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
 
-                let worldTotal_RecoveredString= numberWithCommas(worldTotal_Recovered)
+                let worldTotal_Recovered_String= numberWithCommas(worldTotal_Recovered)
 
 
-                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered: </b>"+worldTotal_RecoveredString
+                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered Cases:</b> "+worldTotal_Recovered_String
 
-                //console.log(sortedConfirmedLabels)
-                //console.log(sortedConfirmedValues)
 
-                /* Highcharts.chart('container', {
-                     chart: {
-                         type: 'bar'
-                     },
-                     title: {
-                         text: 'Confirmed COVID-19 CASES'
-                     },
-                     subtitle: {
-                         text: 'Total Confirmed by Countries'
-                     },
-                     xAxis: {
-                         categories: sortedConfirmedLabels,
-                         title: {
-                             text: null
-                         }
-                     },
-                     yAxis: {
-                         min: 0,
-                         title: {
-                             text: 'Number of Persons',
-                             align: 'high'
-                         },
-                         labels: {
-                             overflow: 'justify'
-                         }
-                     },
-                     tooltip: {
-                         valueSuffix: ' '
-                     },
-                     plotOptions: {
-                         bar: {
-                             dataLabels: {
-                                 enabled: true
-                             }
-                         }
-                     },
-                     legend: {
-                         layout: 'vertical',
-                         align: 'right',
-                         verticalAlign: 'top',
-                         x: -40,
-                         y: 80,
-                         floating: true,
-                         borderWidth: 1,
-                         backgroundColor:
-                             Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                         shadow: true
-                     },
-                     credits: {
-                         enabled: false
-                     },
-                     series: [{
-                         name: 'Confirmed Cases',
-                         data:sortedConfirmedValues
+                let percentChangeDailyArray=[]
+                //calculate daily change compared to data from the day before
+                function DailyChange(){
+                    for (n = 0; n < recoveredValues.length; n++) {
+                        let perc= Math.round((recoveredValues[n]-recoveredValues_OneDayAgo[n])*100/recoveredValues_OneDayAgo[n])
+                        if (perc==Infinity) {
+                            percentChangeDailyArray.push("First Case")
+                        }
+                        else {
+                            percentChangeDailyArray.push(perc)
+                        }
+                    }
+                }
 
-                     }]
-                 });
-                     */
+
+                DailyChange();
+
+                let changeDailyArray=[]
+                //calculate daily change compared to data from the day before
+                function dailyChangeNumber(){
+                    for (n = 0; n < recoveredValues.length; n++) {
+                        let difference= recoveredValues[n]-recoveredValues_OneDayAgo[n]
+
+                        changeDailyArray.push(difference)
+
+
+                    }
+                }
+
+                dailyChangeNumber();
+
+
+
+                //zip values from both lists difference change and labels NUMBER OF PERSONS
+                var zippedChangeDaily = recoveredLabels.map(function(e, i) {
+                    return [e, changeDailyArray[i]];
+                });
+                //sort descending percent change
+                zippedChangeDaily.sort(function(a,b){return b[1]-a[1];});
+
+
+                let topTenDifference=[]
+                function selectTopTen() {
+                    topTenDifference=zippedChangeDaily.slice(0,10)
+                }
+                selectTopTen()
+
+
+
+                let topTenDiffString="";
+                for (i=0;i<topTenDifference.length;i++){
+                    topTenDiffString+=topTenDifference[i][0]+" - "+topTenDifference[i][1]
+                    if (topTenDifference[i+1]){
+                        topTenDiffString+="</br>"
+                    } else {
+                        topTenDiffString+=""
+                    }
+                }
+
+
+                //push the values the document
+                document.getElementById("recoveryIncrease").innerHTML="<b>Top 10 countries with the highest daily increase  in number of persons recovered:</b> "+"</br>"+topTenDiffString
+
+
+                //zip values from both lists perc change and labels
+                var zippedPercDailyChange = recoveredLabels.map(function(e, i) {
+                    return [e, percentChangeDailyArray[i]];
+                });
+                //sort descending percent change
+                zippedPercDailyChange.sort(function(a,b){return b[1]-a[1];});
+
+
+
+                let newCases=[]
+                //finding countries with the first ever cases
+                function SelectNewCases(){
+
+                    for (p=0; p<zippedPercDailyChange.length; p++) {
+
+                        if ((zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="US") &&
+                            (zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="Mainland China")
+                            && (zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="China") &&
+                            (zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="Canada") &&
+                            (zippedPercDailyChange[p][1]=="First Case"  && zippedPercDailyChange[p][0]!="Australia")
+                            && (zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="France")
+                            && (zippedPercDailyChange[p][1]=="First Case" && zippedPercDailyChange[p][0]!="United Kingdom" )) {
+
+                            newCases.push(zippedPercDailyChange[p][0])
+
+                        }
+
+
+                    }
+
+
+
+                }
+                SelectNewCases()
+                //if there is no new country
+                if (newCases.length==0) {
+                    newCases.push("N/A for today")
+                }
+
+                //console.log(newCases)
+                let newCasesString="";
+                function newCasesToString(){
+                    for (i=0; i<newCases.length;i++){
+                        newCasesString+=newCases[i]
+                        if (newCases[i+1]){
+                            newCasesString+=" - "
+                        }
+                        else {
+                            newCasesString+=""
+                        }
+                    }
+                }
+                newCasesToString()
+                //console.log(newCasesString)
+                //slice countries with the top five % daily change from top
+                let topFive=[]
+                function selectTopFive() {
+                    topFive=zippedPercDailyChange.slice(0,5)
+                }
+                selectTopFive()
+
+                //find the today's cases for corresponding country from the topFive list
+
+                let toRecovered=[]
+                for (i=0;i<topFive.length;i++){
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom") {
+                        for(n=0;n<c.length;n++){
+                            if(topFive[i][0]==c[n][0]){
+                                toRecovered.push(c[n][1])
+                            }
+                        }
+                    } else {
+                        for (m=0;m<cStatesOverSeas.length;m++){
+                            if(topFive[i][0]==cStatesOverSeas[m][0] ) {
+                                toRecovered.push(cStatesOverSeas[m][1])
+                            }
+                        }
+                    }
+                }
+
+
+
+
+
+                //find the yesterday's recovered for corresponding country from the topFive list
+                let fromRecovered=[]
+                for (i=0;i<topFive.length;i++){
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom") {
+                        for(n=0;n<cYes.length;n++){
+                            if(topFive[i][0]==cYes[n][0]){
+                                fromRecovered.push(cYes[n][1])
+                            }
+                        }
+                    } else {
+                        for (m=0;m<cStatesOverSeas_OneDayAgo.length;m++){
+                            if(topFive[i][0]==cStatesOverSeas_OneDayAgo[m][0] ) {
+                                fromRecovered.push(cStatesOverSeas_OneDayAgo[m][1])
+                            }
+                        }
+                    }
+                }
+
+
+
+                //put them in a format that will be displayed properly to the user
+                var topFiveString="";
+                function createString(){
+                    for (v=0;v<topFive.length;v++){
+                        topFiveString+=topFive[v][0]
+                        topFiveString+=" "
+                        topFiveString+=topFive[v][1]
+                        if (topFive[v+1]){
+                            topFiveString+="% - from "+fromRecovered[v]+" to "+ toRecovered[v]+ "</br> "
+                        } else {
+                            topFiveString+="% - from "+fromRecovered[v]+" to "+toRecovered[v]
+                        }
+                    }
+                }
+                createString()
+
+                //push the values the document
+                document.getElementById("firstCasesRecovered").innerHTML="<b>Countries that most recently announced the first case of recovery within their borders:</b> "+"</br>"+newCasesString
+
+                document.getElementById("topFiveRecovered").innerHTML="<b>Countries with the highest daily % change in recovered cases: </b> "+"</br>"+topFiveString
+
+
+                Highcharts.chart('container3', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Total Recovered'
+                    },
+                    subtitle: {
+                        text: 'Total Recovered by Countries'
+                    },
+                    xAxis: {
+                        categories: sortedRecoveredLabels,
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Number of Persons',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' '
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    /*legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -40,
+                        y: 80,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor:
+                            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                        shadow: true
+                    },*/
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Recovered Cases',
+                        data:sortedRecoveredValues,
+                        color: '#2b8cbe'
+
+                    }]
+                });
+
             },
 
 
-
-
         });
+
 
 
 
