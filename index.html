@@ -1201,10 +1201,7 @@
                         totalConfirmed_Aus=totalConfirmed_Aus + nmbr
                         totalConfirmed_Aus_OneDayAgo+=nmbr_OneDayAgo
                     }
-                    else if (results.data[i][0]=="Saint Barthelemy" || results.data[i][0]=="Reunion" ||  
-                    results.data[i][0]=="Guadeloupe" || results.data[i][0]=="Mayotte" || 
-                    results.data[i][0]=="French Polynesia" || results.data[i][0]=="France" || 
-                    results.data[i][0]=="St Martin" || results.data[i][0]=="Fench Guiana"){
+                    else if (results.data[i][1]=="France"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
 
                         var nmbr=parseInt(results.data[i][lastCol]);
@@ -1217,7 +1214,7 @@
                         confirmedValues.push(nmbr);
                         confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
                     }
-                    else if (results.data[i][0]=="United Kingdom" || results.data[i][0]=="Channel Islands" || results.data[i][0]=="Gibraltar" ){
+                    else if (results.data[i][1]=="United Kingdom" ){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
 
                         var nmbr=parseInt(results.data[i][lastCol]);
