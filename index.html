@@ -355,6 +355,8 @@ border-radius: 7px;
                 <h5 id="totalRecovered"></h5>
             </div>
 
+            <div id="containerLine" style="width:100%; height:500px;"></div>
+
             <div class="Increase" >
                 <h6 id="caseIncrease"></h6>
             </div>
@@ -424,8 +426,8 @@ border-radius: 7px;
                 with more details such as name of location, date of data. </p>
 
             <div id="container" style="width:100%; height:3000px;"></div>
-            <div id="container2" style="width:100%; height:1000px;"></div>
-            <div id="container3" style="width:100%; height:1000px;"></div>
+            <div id="container2" style="width:100%; height:2000px;"></div>
+            <div id="container3" style="width:100%; height:2000px;"></div>
             <p style="margin-top:130px; font-family:'Ubuntu' ,sans-serif; font-size:10px; line-height: 10px" align=justify >
                 tags: coronavirus, corona, COVID-19, china, novel, new, map, interactive map, infection, disease, outbreak, global map, spread, track, people, sick, death</p>
 
@@ -1160,6 +1162,8 @@ border-radius: 7px;
             .open("home");
 
         //GRAPH, DATA OPERATIONS for Confirmed
+        let timeSeriesConfirmedLabels=[]
+
         let worldTotal_Confirmed=0;
         let confirmedLabels=[];
         let confirmedValues=[];
@@ -1168,6 +1172,21 @@ border-radius: 7px;
         let confirmedValues_StatesAndOverseas_OneDayAgo=[];
         let confirmedValues_OneDayAgo=[];
         //In order to find total cases in US,China,Canada and Australia
+        let timeSeriesConfirmed_US=[]
+        let timeSeriesConfirmed_Australia=[]
+        let timeSeriesConfirmed_Canada=[]
+        let timeSeriesConfirmed_China=[]
+        let timeSeriesConfirmed_Iran=[]
+        let timeSeriesConfirmed_Italy=[]
+        let timeSeriesConfirmed_Spain=[]
+        let timeSeriesConfirmed_Turkey=[]
+        let timeSeriesConfirmed_UK=[]
+        let timeSeriesConfirmed_Germany=[]
+        let timeSeriesConfirmed_France=[]
+        let timeSeriesConfirmed_Switzerland=[]
+        let timeSeriesConfirmed_SouthKorea=[]
+        let timeSeriesConfirmed_Japan=[]
+
         let totalConfirmed_US=0;
         let totalConfirmed_China=0;
         let totalConfirmed_Canada=0;
@@ -1180,16 +1199,22 @@ border-radius: 7px;
         //putting confirmed cases into array format, into the empty arrays defined above
         Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv", {
             download: true,
+            dynamicTyping: true,
             complete: function(results) {
                 //select the latest column
                 let lastCol=results.data[1].length-1;
                 //select the column before the latest to use its data in daily % change calc
                 let last2Col=results.data[1].length-2;
+
+                timeSeriesConfirmedLabels.push((results.data[0]).slice(4,lastCol+1))
+               
                 //find the row where country name is either "US","China","Canada" or "Australia"
                 //and add the corresponding value to the total sum of that country
                 for (i=1; i< results.data.length; i++) {
                     if (results.data[i][1]=="US"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
+                        timeSeriesConfirmed_US.push((results.data[i]))
+                    
 
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
@@ -1203,6 +1228,8 @@ border-radius: 7px;
                     else if (results.data[i][1]=="China"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
 
+                        timeSeriesConfirmed_China.push((results.data[i]))
+
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
 
@@ -1214,6 +1241,7 @@ border-radius: 7px;
                     }
                     else if (results.data[i][1]=="Canada"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
+                        timeSeriesConfirmed_Canada.push((results.data[i]))
 
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
@@ -1226,6 +1254,7 @@ border-radius: 7px;
                     }
                     else if (results.data[i][1]=="Australia"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
+                        timeSeriesConfirmed_Australia.push((results.data[i]))
 
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
@@ -1238,7 +1267,12 @@ border-radius: 7px;
                     }
                     else if (results.data[i][1]=="France"){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
-
+                        //if first column is also france push all columns to time series array
+                        if (results.data[i][0]=="France") {
+                        timeSeriesConfirmed_France.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                       
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
 
@@ -1252,6 +1286,13 @@ border-radius: 7px;
                     else if (results.data[i][1]=="United Kingdom" ){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][0])
 
+                        //if first column is also uk push all columns to time series array
+                        if (results.data[i][0]=="United Kingdom") {
+                        timeSeriesConfirmed_UK.push((results.data[i].slice(4,lastCol+1)))
+                        
+                        }
+
+                        
                         var nmbr=parseInt(results.data[i][lastCol]);
                         var nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
 
@@ -1276,6 +1317,35 @@ border-radius: 7px;
                         confirmedLabels.push(results.data[i][1])
                         confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
 
+                        if (results.data[i][1]=="Turkey") {
+                        timeSeriesConfirmed_Turkey.push(results.data[i].slice(4,lastCol+1))
+                        
+                        } 
+                        else if (results.data[i][1]=="Germany") {
+                        timeSeriesConfirmed_Germany.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                        else if (results.data[i][1]=="Korea, South") {
+                        timeSeriesConfirmed_SouthKorea.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                        else if (results.data[i][1]=="Spain") {
+                        timeSeriesConfirmed_Spain.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                        else if (results.data[i][1]=="Italy") {
+                        timeSeriesConfirmed_Italy.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                        else if (results.data[i][1]=="Iran") {
+                        timeSeriesConfirmed_Iran.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+                        else if (results.data[i][1]=="Switzerland") {
+                        timeSeriesConfirmed_Switzerland.push(results.data[i].slice(4,lastCol+1))
+                        
+                        }
+
                     }
 
                     else {
@@ -1285,6 +1355,58 @@ border-radius: 7px;
                 confirmedLabels.push("US","China","Canada","Australia");
                 confirmedValues.push(totalConfirmed_US,totalConfirmed_China, totalConfirmed_Canada, totalConfirmed_Aus);
                 confirmedValues_OneDayAgo.push(totalConfirmed_US_OneDayAgo,totalConfirmed_China_OneDayAgo,totalConfirmed_Canada_OneDayAgo,totalConfirmed_Aus_OneDayAgo)
+                 
+
+                timeSeriesConfirmed_US_Total=[]
+                
+                for (i=4;i<timeSeriesConfirmed_US[0].length;i++){
+                    column=0
+                    for(n=0;n<timeSeriesConfirmed_US.length;n++) {
+                        column+=timeSeriesConfirmed_US[n][i]
+                    }
+
+                    timeSeriesConfirmed_US_Total.push(column)
+                    
+                }
+
+
+                timeSeriesConfirmed_Canada_Total=[]
+                
+                for (i=4;i<timeSeriesConfirmed_Canada[0].length;i++){
+                    column=0
+                    for(n=0;n<timeSeriesConfirmed_Canada.length;n++) {
+                        column+=timeSeriesConfirmed_Canada[n][i]
+                    }
+
+                    timeSeriesConfirmed_Canada_Total.push(column)
+                    
+                }
+
+                timeSeriesConfirmed_Australia_Total=[]
+                
+                for (i=4;i<timeSeriesConfirmed_Australia[0].length;i++){
+                    column=0
+                    for(n=0;n<timeSeriesConfirmed_Australia.length;n++) {
+                        column+=timeSeriesConfirmed_Australia[n][i]
+                    }
+
+                    timeSeriesConfirmed_Australia_Total.push(column)
+                    
+                }
+
+
+                timeSeriesConfirmed_China_Total=[]
+                
+                for (i=4;i<timeSeriesConfirmed_China[0].length;i++){
+                    column=0
+                    for(n=0;n<timeSeriesConfirmed_China.length;n++) {
+                        column+=timeSeriesConfirmed_China[n][i]
+                    }
+
+                    timeSeriesConfirmed_China_Total.push(column)
+                    
+                }
+                
 
                 //zip values from both lists
                 var cStatesOverSeas = confirmedLabels.map(function(e, i) {
@@ -1609,8 +1731,113 @@ border-radius: 7px;
 
                     }]
                 });
+                
+
+
+                Highcharts.chart('containerLine', {
+
+title: {
+    text: 'Growth of Confirmed Cases by Country'
+},
+
+subtitle: {
+    text: 'Starting Date:1/22/20'
+},
+
+yAxis: {
+    title: {
+        text: 'Persons'
+    }
+},
+
+xAxis: {
+  
+    categories: timeSeriesConfirmedLabels[0]
+        
+    
+},
+
+legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle'
+},
+
+plotOptions: {
+    series: {
+        label: {
+            connectorAllowed: false
+        },
+        pointStart: 0
+    }
+},
+
+series: [{
+    name: 'UK',
+    data: timeSeriesConfirmed_UK[0]
+}, {
+    name: 'France',
+    data: timeSeriesConfirmed_France[0]
+},{
+    name: 'Turkey',
+    data: timeSeriesConfirmed_Turkey[0]
+},{
+    name: 'Germany',
+    data: timeSeriesConfirmed_Germany[0]
+},{
+    name: 'South Korea',
+    data: timeSeriesConfirmed_SouthKorea[0]
+},{
+    name: 'Spain',
+    data: timeSeriesConfirmed_Spain[0]
+},{
+    name: 'Italy',
+    data: timeSeriesConfirmed_Italy[0]
+},{
+    name: 'Iran',
+    data: timeSeriesConfirmed_Iran[0]
+},{
+    name: 'Switzerland',
+    data: timeSeriesConfirmed_Switzerland[0]
+}
+,{
+    name: 'US',
+    data: timeSeriesConfirmed_US_Total
+}
+,{
+    name: 'Canada',
+    data: timeSeriesConfirmed_Canada_Total
+},{
+    name: 'Australia',
+    data: timeSeriesConfirmed_Australia_Total
+},{
+    name: 'China',
+    data: timeSeriesConfirmed_China_Total
+}],
+
+
+responsive: {
+    rules: [{
+        condition: {
+            maxWidth: 500
+        },
+        chartOptions: {
+            legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+            }
+        }
+    }]
+}
+
+});
+
 
             },
+
+            
+            
 
 
         });
@@ -1888,9 +2115,7 @@ border-radius: 7px;
                 selectTopFive()
 
 
-                console.log(topFive)
-                console.log(c)
-                console.log(cStatesOverSeas)
+                
                 //find the today's deaths for corresponding country from the topFive list
                 let toDeath=[]
                 for (i=0;i<topFive.length;i++){
