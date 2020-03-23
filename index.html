@@ -2230,7 +2230,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
         let worldTotal_Deaths_String= numberWithCommas(worldTotal_Deaths)
 
 
-        document.getElementById("totalDeaths").innerHTML="<b>Total Deaths Cases:</b> "+worldTotal_Deaths_String
+        document.getElementById("totalDeaths").innerHTML="<b>Total Deaths:</b> "+worldTotal_Deaths_String
 
 
         let percentChangeDailyArray=[]
@@ -2298,7 +2298,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
 
 
         //push the values the document
-        document.getElementById("deathIncrease").innerHTML="<b>Top 10 countries with the highest daily increase in number of persons infected:</b> "+"</br>"+topTenDiffString
+        document.getElementById("deathIncrease").innerHTML="<b>Top 10 countries with the highest daily increase in number of deaths:</b> "+"</br>"+topTenDiffString
 
 
         //zip values from both lists perc change and labels
@@ -2423,7 +2423,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
         createString()
 
         //push the values the document
-        document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first deaths cases within their borders:</b> "+"</br>"+newCasesString
+        document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first deaths within their borders:</b> "+"</br>"+newCasesString
 
         document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily % change in deaths: </b> "+"</br>"+topFiveString
 
@@ -2804,7 +2804,7 @@ chartOptions: {
                 let worldTotal_Recovered_String= numberWithCommas(worldTotal_Recovered)
 
 
-                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered Cases:</b> "+worldTotal_Recovered_String
+                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered:</b> "+worldTotal_Recovered_String
 
 
                 let percentChangeDailyArray=[]
@@ -2994,7 +2994,7 @@ chartOptions: {
                 //push the values the document
                 document.getElementById("firstCasesRecovered").innerHTML="<b>Countries that most recently announced the first case of recovery within their borders:</b> "+"</br>"+newCasesString
 
-                document.getElementById("topFiveRecovered").innerHTML="<b>Countries with the highest daily % change in recovered cases: </b> "+"</br>"+topFiveString
+                document.getElementById("topFiveRecovered").innerHTML="<b>Countries with the highest daily % change in recovered: </b> "+"</br>"+topFiveString
 
 
                 Highcharts.chart('containerBarRecovered', {
@@ -3049,7 +3049,7 @@ chartOptions: {
                         enabled: false
                     },
                     series: [{
-                        name: 'Recovered Cases',
+                        name: 'Recovered',
                         data:sortedRecoveredValues,
                         color: '#2b8cbe'
 
