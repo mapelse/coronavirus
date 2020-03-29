@@ -221,6 +221,12 @@
 
         }
 
+        .upperInfo2 {
+            background: rgb(243, 238, 163);
+            border-radius: 7px;
+
+        }
+
         h5 {
             width:100%;
             margin-top:10px;
@@ -358,6 +364,8 @@ border-radius: 7px;
                 <h5 id="totalRecovered"></h5>
             </div>
             
+            
+
             <div id="containerLineConfirmed" style="width:100%; height:500px;"></div>
             <p style="margin-top:30px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >In order to see the graph in full screen you can click the symbol <i class="fa fa-bars"></i> 
                  on top right corner (not possible for mobile devices) of the graph. Hovering over the name of the country in the legend will highlight its line on the graph. To select countries of interest and switch on/off others click on country names shown in the legend. </p>
@@ -379,6 +387,11 @@ border-radius: 7px;
 
                 <h6 id="topFive"></h6>
 
+            </div>
+
+            <div class="percentConfirmed">
+                <h6 id="fastestConfirmed"></h6>
+                
             </div>
 
             <div id="containerLineDeaths" style="width:100%; height:500px;"></div>
@@ -1770,6 +1783,106 @@ let recoveredLayer= L.geoJson(null, {
 
                 document.getElementById("topFive").innerHTML="<b>Countries with the highest daily % change in confirmed cases (over 100 cases): </b> "+"</br>"+topFiveString
 
+//////// Speed in reaching 1000 cases
+
+
+function findFastest(x){
+
+dateOfFirstCase=0;
+dateOf_x_Case=0;
+passedNumberOfDaysFinal=1000;
+fastestCountry="";
+passedNumberOfDays=0
+    for (i=1; i< results.data.length; i++) {
+        for (n=4;n<results.data[0].length;n++){
+            if (results.data[i][4]>0 && results.data[i][1]!="China" ){
+                dateOfFirstCase=4
+                if (results.data[i][n-1]<x && results.data[i][n]>=x){
+                dateOf_x_Case=n
+                
+                passedNumberOfDays= dateOf_x_Case-dateOfFirstCase
+             
+                if (passedNumberOfDays<passedNumberOfDaysFinal){
+                    passedNumberOfDaysFinal=passedNumberOfDays
+                
+                    fastestCountry=x+ " confirmed cases: "+results.data[i][1]+" / "+ passedNumberOfDays+" days"
+            }
+                
+            }
+                
+            }
+           
+            else if (results.data[i][1]!="China" && results.data[i][4]==0) {
+            if(results.data[i][n-1]==0 && results.data[i][n]>0){
+            
+                dateOfFirstCase=n
+   
+              
+            }  
+            if (results.data[i][n-1]<x && results.data[i][n]>=x){
+                dateOf_x_Case=n
+                
+                passedNumberOfDays= dateOf_x_Case-dateOfFirstCase
+               
+                if (passedNumberOfDays<passedNumberOfDaysFinal){
+                    passedNumberOfDaysFinal=passedNumberOfDays
+                 
+                fastestCountry=x+ " confirmed cases: "+results.data[i][1]+" / "+ passedNumberOfDays+" days"
+            }
+                
+            }
+            }
+           
+         
+        }
+        
+
+}
+           
+           
+}
+
+
+
+fastestConfirmed1000="";
+findFastest(1000)
+fastestConfirmed1000=fastestCountry
+
+
+fastestConfirmed5000="";
+findFastest(5000)
+fastestConfirmed5000=fastestCountry
+
+
+fastestConfirmed10000="";
+findFastest(10000)
+fastestConfirmed10000=fastestCountry
+
+fastestConfirmed20000="";
+findFastest(20000)
+fastestConfirmed20000=fastestCountry
+
+fastestConfirmed30000="";
+findFastest(30000)
+fastestConfirmed30000=fastestCountry
+
+fastestConfirmed50000="";
+findFastest(50000)
+fastestConfirmed50000=fastestCountry
+
+fastestConfirmed70000="";
+findFastest(70000)
+fastestConfirmed70000=fastestCountry
+
+fastestConfirmed100000="";
+findFastest(100000)
+fastestConfirmed100000=fastestCountry
+
+  //push the values the document
+  document.getElementById("fastestConfirmed").innerHTML="<b>Country (except China) fastest reaching to:</b> "+"</br>"+fastestConfirmed1000+"</br>"+fastestConfirmed5000+"</br>"+fastestConfirmed10000+"</br>"+fastestConfirmed20000+"</br>"+fastestConfirmed30000+"</br>"+fastestConfirmed50000+"</br>"+fastestConfirmed70000+"</br>"+fastestConfirmed100000
+
+
+////Graphs for confirmed cases
 
                 Highcharts.chart('containerBarConfirmed', {
                     chart: {
@@ -2529,6 +2642,84 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
         document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first deaths within their borders:</b> "+"</br>"+newCasesString
 
         document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily % change in deaths (over 10 deaths): </b> "+"</br>"+topFiveString
+        function findFastest(x){
+
+dateOfFirstCase=0;
+dateOf_x_Case=0;
+passedNumberOfDaysFinal=1000;
+fastestCountry="";
+passedNumberOfDays=0
+    for (i=1; i< results.data.length; i++) {
+        for (n=4;n<results.data[0].length;n++){
+            if (results.data[i][4]>0 && results.data[i][1]!="China" ){
+                dateOfFirstCase=4
+                if (results.data[i][n-1]<x && results.data[i][n]>=x){
+                dateOf_x_Case=n
+                
+                passedNumberOfDays= dateOf_x_Case-dateOfFirstCase
+             
+                if (passedNumberOfDays<passedNumberOfDaysFinal){
+                    passedNumberOfDaysFinal=passedNumberOfDays
+                
+                fastestCountry="Country fastest reaching to "+x+ " deaths:"+results.data[i][1]+" / "+ passedNumberOfDays+" days"
+          
+            }
+                
+            }
+                
+            }
+           
+            else if (results.data[i][1]!="China" && results.data[i][4]==0) {
+            if(results.data[i][n-1]==0 && results.data[i][n]>0){
+            
+                dateOfFirstCase=n
+   
+              
+            }  
+            if (results.data[i][n-1]<x && results.data[i][n]>=x){
+                dateOf_x_Case=n
+                
+                passedNumberOfDays= dateOf_x_Case-dateOfFirstCase
+               
+                if (passedNumberOfDays<passedNumberOfDaysFinal){
+                    passedNumberOfDaysFinal=passedNumberOfDays
+                 
+                fastestCountry="Country fastest reaching to "+x+ " deaths:"+results.data[i][1]+" / "+ passedNumberOfDays+" days"
+            }
+                
+            }
+            }
+           
+         
+        }
+        
+
+}
+           
+           
+}
+
+
+
+
+findFastest(50)
+
+console.log(fastestCountry)
+
+findFastest(100)
+console.log(fastestCountry)
+
+
+findFastest(500)
+console.log(fastestCountry)
+
+findFastest(1000)
+console.log(fastestCountry)
+
+findFastest(5000)
+console.log(fastestCountry)
+findFastest(10000)
+console.log(fastestCountry)
 
 
         Highcharts.chart('containerBarDeaths', {
