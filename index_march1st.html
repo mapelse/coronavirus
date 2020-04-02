@@ -1582,7 +1582,7 @@
                         text: 'Confirmed COVID-19 CASES'
                     },
                     subtitle: {
-                        text: 'Total Confirmed by Countries'
+                        text: 'Total Confirmed by Country'
                     },
                     xAxis: {
                         categories: sortedConfirmedLabels,
@@ -2065,7 +2065,7 @@
                 }
                 let worldTotal_Deaths_String= numberWithCommas(worldTotal_Deaths)
 
-                document.getElementById("totalDeaths").innerHTML="<b>Total Deaths Cases:</b> "+worldTotal_Deaths_String
+                document.getElementById("totalDeaths").innerHTML="<b>Total Deaths:</b> "+worldTotal_Deaths_String
 
 
 
@@ -2236,8 +2236,8 @@
                 }
                 createString()
                 //push the values the document
-                document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first deaths cases within their borders:</b> "+"</br>"+newCasesString
-                document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily % change in deaths cases: </b> "+"</br>"+topFiveString
+                document.getElementById("firstDeath").innerHTML="<b>Countries that most recently announced the first deaths within their borders:</b> "+"</br>"+newCasesString
+                document.getElementById("topFiveDeath").innerHTML="<b>Countries with the highest daily % change in deaths: </b> "+"</br>"+topFiveString
 
 
         
@@ -2310,7 +2310,7 @@
                 //Line chart
                 Highcharts.chart('containerLineDeaths', {
                     title: {
-                        text: 'Growth of Deaths Cases by Country'
+                        text: 'Growth of Deaths by Country'
                     },
                     subtitle: {
                         text: 'Starting Date:1/22/20'
@@ -2744,7 +2744,7 @@
                 }
                 let worldTotal_Recovered_String= numberWithCommas(worldTotal_Recovered)
 
-                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered Cases:</b> "+worldTotal_Recovered_String
+                document.getElementById("totalRecovered").innerHTML="<b>Total Recovered:</b> "+worldTotal_Recovered_String
 
 
 
@@ -2917,8 +2917,8 @@
                 }
                 createString()
                 //push the values the document
-                document.getElementById("firstRecovered").innerHTML="<b>Countries that most recently announced the first recovered cases within their borders:</b> "+"</br>"+newCasesString
-                document.getElementById("topFiveRecovered").innerHTML="<b>Countries with the highest daily % change in recovered cases: </b> "+"</br>"+topFiveString
+                document.getElementById("firstRecovered").innerHTML="<b>Countries that most recently announced the first recovered within their borders:</b> "+"</br>"+newCasesString
+                document.getElementById("topFiveRecovered").innerHTML="<b>Countries with the highest daily % change in recovered: </b> "+"</br>"+topFiveString
 
 
 
