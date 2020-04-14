@@ -38,6 +38,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--marker cluster javascript-->
     <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+    <!--Jquery-->
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -276,9 +281,32 @@
                 font-size: 18px;
             }
         }
+        #loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+    position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  
+}
     </style>
 </head>
 <body>
+    <div id="loading">
+        <img id="loading-image" src="images/spinner-5.gif" alt="Loading..." />
+      </div>
 <!-- SIDEBAR STARTS HERE-->
 <div id="sidebar" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
@@ -416,11 +444,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<!--Jquery-->
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+
 <!-- below is for bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -431,7 +455,7 @@
 <!--CSV parser Papa parse-->
 <script src="assets/js/papaparse.min.js"></script>
 <script>
-    window.onload= function () {
+   
         /*various options for the basemap*/
         let grayscale = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -3115,9 +3139,15 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
 });
 
 
-    };
+
 
 </script>
+
+<script>
+    $(window).load(function() {
+      $('#loading').hide();
+    });
+  </script>
 
 </body>
 </html>
