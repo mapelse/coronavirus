@@ -1094,7 +1094,7 @@ crossorigin="anonymous"></script>
         let timeSeriesConfirmed_UK=[]
         let timeSeriesConfirmed_Germany=[]
         let timeSeriesConfirmed_France=[]
-        let timeSeriesConfirmed_Switzerland=[]
+        let timeSeriesConfirmed_Russia=[]
         let timeSeriesConfirmed_SouthKorea=[]
         let timeSeriesConfirmed_Japan=[]
         let timeSeriesConfirmed_Czechia=[]
@@ -1260,8 +1260,8 @@ crossorigin="anonymous"></script>
                         else if (results.data[i][1]=="Iran") {
                             timeSeriesConfirmed_Iran.push(results.data[i].slice(4,lastCol+1))
                         }
-                        else if (results.data[i][1]=="Switzerland") {
-                            timeSeriesConfirmed_Switzerland.push(results.data[i].slice(4,lastCol+1))
+                        else if (results.data[i][1]=="Russia") {
+                            timeSeriesConfirmed_Russia.push(results.data[i].slice(4,lastCol+1))
                         }
                         else if (results.data[i][1]=="Czechia") {
                             timeSeriesConfirmed_Czechia.push(results.data[i].slice(4,lastCol+1))
@@ -1735,8 +1735,8 @@ crossorigin="anonymous"></script>
                         name: 'Iran',
                         data: timeSeriesConfirmed_Iran[0]
                     },{
-                        name: 'Switzerland',
-                        data: timeSeriesConfirmed_Switzerland[0]
+                        name: 'Russia',
+                        data: timeSeriesConfirmed_Russia[0]
                     }
                         ,{
                             name: 'US',
@@ -1818,7 +1818,7 @@ crossorigin="anonymous"></script>
         let timeSeriesDeaths_UK=[]
         let timeSeriesDeaths_Germany=[]
         let timeSeriesDeaths_France=[]
-        let timeSeriesDeaths_Switzerland=[]
+        let timeSeriesDeaths_Russia=[]
         let timeSeriesDeaths_SouthKorea=[]
         let timeSeriesDeaths_Japan=[]
         let timeSeriesDeaths_Czechia=[]
@@ -1982,8 +1982,8 @@ crossorigin="anonymous"></script>
                         else if (results.data[i][1]=="Iran") {
                             timeSeriesDeaths_Iran.push(results.data[i].slice(4,lastCol+1))
                         }
-                        else if (results.data[i][1]=="Switzerland") {
-                            timeSeriesDeaths_Switzerland.push(results.data[i].slice(4,lastCol+1))
+                        else if (results.data[i][1]=="Russia") {
+                            timeSeriesDeaths_Russia.push(results.data[i].slice(4,lastCol+1))
                         }
                         else if (results.data[i][1]=="Czechia") {
                             timeSeriesDeaths_Czechia.push(results.data[i].slice(4,lastCol+1))
@@ -2454,8 +2454,8 @@ crossorigin="anonymous"></script>
                         name: 'Iran',
                         data: timeSeriesDeaths_Iran[0]
                     },{
-                        name: 'Switzerland',
-                        data: timeSeriesDeaths_Switzerland[0]
+                        name: 'Russia',
+                        data: timeSeriesDeaths_Russia[0]
                     }
                         ,{
                             name: 'US',
@@ -2522,7 +2522,7 @@ let timeSeriesRecovered_Turkey=[]
 let timeSeriesRecovered_UK=[]
 let timeSeriesRecovered_Germany=[]
 let timeSeriesRecovered_France=[]
-let timeSeriesRecovered_Switzerland=[]
+let timeSeriesRecovered_Russia=[]
 let timeSeriesRecovered_SouthKorea=[]
 let timeSeriesRecovered_Japan=[]
 let timeSeriesRecovered_Czechia=[]
@@ -2686,8 +2686,8 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
                 else if (results.data[i][1]=="Iran") {
                     timeSeriesRecovered_Iran.push(results.data[i].slice(4,lastCol+1))
                 }
-                else if (results.data[i][1]=="Switzerland") {
-                    timeSeriesRecovered_Switzerland.push(results.data[i].slice(4,lastCol+1))
+                else if (results.data[i][1]=="Russia") {
+                    timeSeriesRecovered_Russia.push(results.data[i].slice(4,lastCol+1))
                 }
                 else if (results.data[i][1]=="Czechia") {
                     timeSeriesRecovered_Czechia.push(results.data[i].slice(4,lastCol+1))
@@ -3092,8 +3092,8 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
                 name: 'Iran',
                 data: timeSeriesRecovered_Iran[0]
             },{
-                name: 'Switzerland',
-                data: timeSeriesRecovered_Switzerland[0]
+                name: 'Russia',
+                data: timeSeriesRecovered_Russia[0]
             }
                 ,{
                     name: 'US',
