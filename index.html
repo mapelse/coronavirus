@@ -6,15 +6,15 @@
     <!--metda data-->
     <meta name="description" content="coronavirus, corona, COVID-19, china, wuhan, virus, novel, new, map, interactive map, open source, death, dashboard, infection, disease, outbreak, global map, spread, track, tracking, leaflet.js, dashboard, mapbox, arcgis, qgis, web map, GIS, graph, data "/>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57534785-5"></script>
-      <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-   
-          gtag('config', 'UA-57534785-5');
-      </script>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57534785-5"></script>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+  
+         gtag('config', 'UA-57534785-5');
+     </script>
     <!--Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap" rel="stylesheet">
@@ -418,7 +418,7 @@ crossorigin="anonymous"></script>
             <hr>
             <div id="containerBarDeaths" style="width:100%; height:3500px;"></div>
             <hr>
-            <div id="containerBarRecovered" style="width:100%; height:3500px;"></div>
+            <div id="containerBarRecovered" style="width:100%; height:3000px;"></div>
             <p style="margin-top:10px; font-family:'Ubuntu', sans-serif; line-height: 20px" align=justify >contact:s.sanozmen@hotmail.com</p>
             <p style="margin-top:130px; font-family:'Ubuntu' ,sans-serif; font-size:10px; line-height: 10px" align=justify >
                 tags: coronavirus, corona, COVID-19, china, novel, new, map, interactive map, infection, disease, outbreak, global map, spread, track, people, sick, death</p>
@@ -1077,7 +1077,7 @@ crossorigin="anonymous"></script>
         let worldTotal_Confirmed=0;
         let confirmedLabels=[];
         let confirmedValues=[];
-        //states and overseas variable is mainly required to avoid calculation mistakes for countries like UK,Brazil,FR
+        //states and overseas variable is mainly required to avoid calculation mistakes for countries like UK,NL,FR
         let confirmedLabels_StatesAndOverseas=[];
         let confirmedValues_StatesAndOverseas=[];
         let confirmedValues_StatesAndOverseas_OneDayAgo=[];
@@ -1098,7 +1098,7 @@ crossorigin="anonymous"></script>
         let timeSeriesConfirmed_SouthKorea=[]
         let timeSeriesConfirmed_Japan=[]
         let timeSeriesConfirmed_Czechia=[]
-        let timeSeriesConfirmed_Brazil=[]
+        let timeSeriesConfirmed_NL=[]
         //In order to find total cases in US,China,Canada and Australia, whose data is presented separately for states
         let totalConfirmed_US=0;
         let totalConfirmed_China=0;
@@ -1182,13 +1182,13 @@ crossorigin="anonymous"></script>
                         confirmedValues.push(nmbr);
                         confirmedValues_OneDayAgo.push(nmbr_OneDayAgo)
                     }
-                    else if (results.data[i][1]==="Brazil"){
+                    else if (results.data[i][1]==="Netherlands"){
                         let nmbr=results.data[i][lastCol];
                         let nmbr_OneDayAgo=results.data[i][last2Col];
                         if (results.data[i][0]===null) {
                             confirmedLabels_StatesAndOverseas.push(results.data[i][1])
                             confirmedLabels.push(results.data[i][1])
-                            timeSeriesConfirmed_Brazil.push(results.data[i].slice(4,lastCol+1))
+                            timeSeriesConfirmed_NL.push(results.data[i].slice(4,lastCol+1))
                         } else {
                             confirmedLabels.push(results.data[i][0])
                             confirmedLabels_StatesAndOverseas.push(results.data[i][0])
@@ -1233,7 +1233,7 @@ crossorigin="anonymous"></script>
                     //and push the corresponding value to the values list
                     else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
                         || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="Denmark" || results.data[i][1]!="France" || results.data[i][1]!="United Kingdom" ||
-                        results.data[i][1]!="Brazil" ){
+                        results.data[i][1]!="Netherlands" ){
                         confirmedLabels_StatesAndOverseas.push(results.data[i][1])
                         let nmbr_OneDayAgo=results.data[i][last2Col];
                         let nmbr=results.data[i][lastCol];
@@ -1447,7 +1447,7 @@ crossorigin="anonymous"></script>
                             (zippedNewCasesAndLabels[p][1]=="First Case"  && zippedNewCasesAndLabels[p][0]!="Australia")
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="France")
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="United Kingdom" )
-                            && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Brazil" )
+                            && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Netherlands" )
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Denmark" )) {
                             newCases.push(zippedNewCasesAndLabels[p][0])
                         }
@@ -1482,7 +1482,7 @@ crossorigin="anonymous"></script>
                 //find the today's cases for corresponding country from the topFive list
                 let toConfirmed=[]
                 for (i=0;i<topFive.length;i++){
-                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                         for(n=0;n<c.length;n++){
                             if(topFive[i][0]==c[n][0]){
                                 toConfirmed.push(c[n][1])
@@ -1501,7 +1501,7 @@ crossorigin="anonymous"></script>
                 //find the yesterday's deaths for corresponding country from the topFive list
                 let fromConfirmed=[]
                 for (i=0;i<topFive.length;i++){
-                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                         for(n=0;n<cYes.length;n++){
                             if(topFive[i][0]==cYes[n][0]){
                                 fromConfirmed.push(cYes[n][1])
@@ -1755,8 +1755,8 @@ crossorigin="anonymous"></script>
                             name: 'Czechia',
                             data: timeSeriesConfirmed_Czechia[0]
                         },{
-                            name: 'Brazil',
-                            data: timeSeriesConfirmed_Brazil[0]
+                            name: 'Netherlands',
+                            data: timeSeriesConfirmed_NL[0]
                         }],
                         
 
@@ -1822,7 +1822,7 @@ crossorigin="anonymous"></script>
         let timeSeriesDeaths_SouthKorea=[]
         let timeSeriesDeaths_Japan=[]
         let timeSeriesDeaths_Czechia=[]
-        let timeSeriesDeaths_Brazil=[]
+        let timeSeriesDeaths_NL=[]
 
         let totalDeaths_US=0;
         let totalDeaths_China=0;
@@ -1903,13 +1903,13 @@ crossorigin="anonymous"></script>
                         deathsValues.push(nmbr);
                         deathsValues_OneDayAgo.push(nmbr_OneDayAgo)
                     }
-                    else if (results.data[i][1]==="Brazil"){
+                    else if (results.data[i][1]==="Netherlands"){
                         let nmbr=results.data[i][lastCol];
                         let nmbr_OneDayAgo=results.data[i][last2Col];
                         if (results.data[i][0]===null) {
                             deathsLabels_StatesAndOverseas.push(results.data[i][1])
                             deathsLabels.push(results.data[i][1])
-                            timeSeriesDeaths_Brazil.push(results.data[i].slice(4,lastCol+1))
+                            timeSeriesDeaths_NL.push(results.data[i].slice(4,lastCol+1))
                         } else {
                             deathsLabels.push(results.data[i][0])
                             deathsLabels_StatesAndOverseas.push(results.data[i][0])
@@ -1955,7 +1955,7 @@ crossorigin="anonymous"></script>
                     else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
                         || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" ||
                         results.data[i][1]!="United Kingdom"
-                        || results.data[i][1]!="Denmark" || results.data[i][1]!="Brazil"){
+                        || results.data[i][1]!="Denmark" || results.data[i][1]!="Netherlands"){
                         deathsLabels_StatesAndOverseas.push(results.data[i][1])
                         let nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                         let nmbr=parseInt(results.data[i][lastCol]);
@@ -2166,7 +2166,7 @@ crossorigin="anonymous"></script>
                             (zippedNewCasesAndLabels[p][1]=="First Case"  && zippedNewCasesAndLabels[p][0]!="Australia")
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="France")
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="United Kingdom" )
-                            && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Brazil" )
+                            && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Netherlands" )
                             && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Denmark" )) {
                             newCases.push(zippedNewCasesAndLabels[p][0])
                         }
@@ -2201,7 +2201,7 @@ crossorigin="anonymous"></script>
                 //find the today's cases for corresponding country from the topFive list
                 let toDeaths=[]
                 for (i=0;i<topFive.length;i++){
-                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                         for(n=0;n<c.length;n++){
                             if(topFive[i][0]==c[n][0]){
                                 toDeaths.push(c[n][1])
@@ -2220,7 +2220,7 @@ crossorigin="anonymous"></script>
                 //find the yesterday's deaths for corresponding country from the topFive list
                 let fromDeaths=[]
                 for (i=0;i<topFive.length;i++){
-                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+                    if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                         for(n=0;n<cYes.length;n++){
                             if(topFive[i][0]==cYes[n][0]){
                                 fromDeaths.push(cYes[n][1])
@@ -2472,8 +2472,8 @@ crossorigin="anonymous"></script>
                             data: timeSeriesDeaths_China_Total
                         }
                         ,{
-                            name: 'Brazil',
-                            data: timeSeriesDeaths_Brazil[0]
+                            name: 'Netherlands',
+                            data: timeSeriesDeaths_NL[0]
                         }
                         ,{
                             name: 'Czechia',
@@ -2526,7 +2526,7 @@ let timeSeriesRecovered_Russia=[]
 let timeSeriesRecovered_SouthKorea=[]
 let timeSeriesRecovered_Japan=[]
 let timeSeriesRecovered_Czechia=[]
-let timeSeriesRecovered_Brazil=[]
+let timeSeriesRecovered_NL=[]
 
 let totalRecovered_US=0;
 let totalRecovered_China=0;
@@ -2607,13 +2607,13 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
                 recoveredValues.push(nmbr);
                 recoveredValues_OneDayAgo.push(nmbr_OneDayAgo)
             }
-            else if (results.data[i][1]==="Brazil"){
+            else if (results.data[i][1]==="Netherlands"){
                 let nmbr=results.data[i][lastCol];
                 let nmbr_OneDayAgo=results.data[i][last2Col];
                 if (results.data[i][0]===null) {
                     recoveredLabels_StatesAndOverseas.push(results.data[i][1])
                     recoveredLabels.push(results.data[i][1])
-                    timeSeriesRecovered_Brazil.push(results.data[i].slice(4,lastCol+1))
+                    timeSeriesRecovered_NL.push(results.data[i].slice(4,lastCol+1))
                 } else {
                     recoveredLabels.push(results.data[i][0])
                     recoveredLabels_StatesAndOverseas.push(results.data[i][0])
@@ -2659,7 +2659,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
             else if (results.data[i][1]!="US" || results.data[i][1]!="Mainland China"|| results.data[i][1]!="China"
                 || results.data[i][1]!="Canada" || results.data[i][1]!="Australia" || results.data[i][1]!="France" ||
                 results.data[i][1]!="United Kingdom"
-                || results.data[i][1]!="Denmark" || results.data[i][1]!="Brazil"){
+                || results.data[i][1]!="Denmark" || results.data[i][1]!="Netherlands"){
                 recoveredLabels_StatesAndOverseas.push(results.data[i][1])
                 let nmbr_OneDayAgo=parseInt(results.data[i][last2Col]);
                 let nmbr=parseInt(results.data[i][lastCol]);
@@ -2870,7 +2870,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
                     (zippedNewCasesAndLabels[p][1]=="First Case"  && zippedNewCasesAndLabels[p][0]!="Australia")
                     && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="France")
                     && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="United Kingdom" )
-                    && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Brazil" )
+                    && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Netherlands" )
                     && (zippedNewCasesAndLabels[p][1]=="First Case" && zippedNewCasesAndLabels[p][0]!="Denmark" )) {
                     newCases.push(zippedNewCasesAndLabels[p][0])
                 }
@@ -2905,7 +2905,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
         //find the today's cases for corresponding country from the topFive list
         let toRecovered=[]
         for (i=0;i<topFive.length;i++){
-            if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+            if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                 for(n=0;n<c.length;n++){
                     if(topFive[i][0]==c[n][0]){
                         toRecovered.push(c[n][1])
@@ -2924,7 +2924,7 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
         //find the yesterday's recovered for corresponding country from the topFive list
         let fromRecovered=[]
         for (i=0;i<topFive.length;i++){
-            if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Brazil") {
+            if (topFive[i][0]!="Denmark" && topFive[i][0]!="France" && topFive[i][0]!="United Kingdom" && topFive[i][0]!="Netherlands") {
                 for(n=0;n<cYes.length;n++){
                     if(topFive[i][0]==cYes[n][0]){
                         fromRecovered.push(cYes[n][1])
@@ -3110,8 +3110,8 @@ Papa.parse("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/css
                     data: timeSeriesRecovered_China_Total
                 }
                 ,{
-                    name: 'Brazil',
-                    data: timeSeriesRecovered_Brazil[0]
+                    name: 'Netherlands',
+                    data: timeSeriesRecovered_NL[0]
                 }
                 ,{
                     name: 'Czechia',
